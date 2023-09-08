@@ -7,14 +7,8 @@ module.exports = {
         'main-background': '#fff4ec',
         'main-green': '#355D4E',
         'main-red': '#AC3333',
-        'second': '#47019d',
-        'three': '#e00256',
-        'black': '#212121',
-        'white': '#ffffff',
-        'gray': '#808080e2'
       }
     },
   },
   plugins: [],
 }
-

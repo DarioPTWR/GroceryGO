@@ -2,10 +2,15 @@ import { useState } from 'react';
 import React from 'react';
 import { Button, StyleSheet, Text, View, Pressable } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
+import backButton from '../components/backButton';
 
 export default function Scanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [product, setProduct] = useState('');
+  const navigation = useNavigation();
 
   React.useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -17,13 +22,23 @@ export default function Scanner() {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    axios.get(
+      `https://api.upcdatabase.org/product/${data}?apikey=6D00C35F312273F6627F7266B6D3A333` // add to backend
+    )
+      .then(res => {
+        setScanned(true);
+        setProduct(res.data.title)
+      })
+      .catch(err => {
+        setScanned(true);
+        alert(err)
+      })
   };
 
   if (hasPermission === null) {
     return (
       <View className="flex-1 justify-center items-center mx-14">
+        <backButton/>
         <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
         <View 
@@ -41,24 +56,50 @@ export default function Scanner() {
     )
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return (
+      <View className="flex-1 justify-center items-center mx-14">
+        <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
+        <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
+        <View 
+          className="w-full aspect-square my-6 bg-zinc-700 flex justify-center p-6"
+        >
+          <Text className="text-white text-2xl text-center">No camera access.</Text>
+        </View>
+        <Text className="text-center font-bold text-md">Please scan the barcode of the product.</Text>
+        <Pressable 
+          className="bg-main-green rounded-lg p-3 w-full mt-8"
+        >
+          <Text className='text-white text-lg text-center'>Scan Product</Text>
+        </Pressable>
+      </View>
+    )
   }
 
   return (
-    <View className="flex-1 justify-center items-center mx-14">
+    <View className="flex-1 mt-24 mx-14">
       <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
       <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
       <BarCodeScanner 
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} 
         className="w-full aspect-square my-6"
       />
-      <Text className="text-center font-bold text-md">Please scan the barcode of the product.</Text>
+      {!scanned && <Text className="text-center font-bold text-md">Please scan the barcode of the product.</Text>}
+      {scanned && <Text className="text-center font-extrabold text-lg text-md text-main-red">PRODUCT SCANNED:</Text>}
+      {scanned && <Text className="text-center font-extrabold text-xl text-main-red">{product}</Text>}
       <Pressable 
         className="bg-main-green rounded-lg p-3 w-full mt-8" 
         onPress={() => setScanned(false)}
       >
-        <Text className='text-white text-lg text-center'>Scan Product</Text>
+        <Text className='text-white text-lg text-center'>Scan {scanned ? 'Again' : 'Product'}</Text>
       </Pressable>
+      {scanned && 
+        <Pressable 
+          className="bg-main-green rounded-lg p-3 w-full mt-6" 
+          onPress={() => navigation.navigate("Test")}
+        >
+          <Text className='text-white text-lg text-center'>Find Out More</Text>
+        </Pressable>
+      }
     </View>
   );
 }

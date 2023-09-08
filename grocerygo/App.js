@@ -1,11 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationAction, StackActions } from "react-navigation";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function App() {
+import Scanner from "./src/pages/Scanner";
+import { NavigationContainer } from "@react-navigation/native";
+
+const Tab = createBottomTabNavigator()
+
+export default function App(){
   return (
-    <View className="">
-      <Text className="text-4xl">Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <SafeAreaProvider className="bg-main-background">
+      <NavigationContainer>
+        <Tab.Navigator screenOptions={{headerShown: false}}>
+          <Tab.Screen name="Scanner" component={Scanner}></Tab.Screen>
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  )
 }

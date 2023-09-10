@@ -4,13 +4,13 @@ import { Button, StyleSheet, Text, View, Pressable } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import backButton from '../components/backButton';
+import BackButton from '../components/BackButton';
 
-export default function Scanner() {
+export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [product, setProduct] = useState('');
-  const navigation = useNavigation();
+  const [productData, setProductData] = useState({});
+  // const navigation = useNavigation();
 
   React.useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -27,7 +27,7 @@ export default function Scanner() {
     )
       .then(res => {
         setScanned(true);
-        setProduct(res.data.title)
+        setProductData(res.data)
       })
       .catch(err => {
         setScanned(true);
@@ -38,7 +38,7 @@ export default function Scanner() {
   if (hasPermission === null) {
     return (
       <View className="flex-1 justify-center items-center mx-14">
-        <backButton/>
+        <BackButton/>
         <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
         <View 
@@ -76,7 +76,9 @@ export default function Scanner() {
   }
 
   return (
-    <View className="flex-1 mt-24 mx-14">
+    <>
+    <BackButton navigation={navigation}/>
+    <View className="flex-1 mt-8 mx-14">
       <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
       <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
       <BarCodeScanner 
@@ -85,7 +87,7 @@ export default function Scanner() {
       />
       {!scanned && <Text className="text-center font-bold text-md">Please scan the barcode of the product.</Text>}
       {scanned && <Text className="text-center font-extrabold text-lg text-md text-main-red">PRODUCT SCANNED:</Text>}
-      {scanned && <Text className="text-center font-extrabold text-xl text-main-red">{product}</Text>}
+      {scanned && <Text className="text-center font-extrabold text-xl text-main-red">{productData.title}</Text>}
       <Pressable 
         className="bg-main-green rounded-lg p-3 w-full mt-8" 
         onPress={() => setScanned(false)}
@@ -95,11 +97,12 @@ export default function Scanner() {
       {scanned && 
         <Pressable 
           className="bg-main-green rounded-lg p-3 w-full mt-6" 
-          onPress={() => navigation.navigate("Test")}
+          onPress={() => navigation.navigate("Test", {productData: productData})}
         >
           <Text className='text-white text-lg text-center'>Find Out More</Text>
         </Pressable>
       }
     </View>
+    </>
   );
 }

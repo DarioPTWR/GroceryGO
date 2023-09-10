@@ -1,8 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
+import BackButton from '../components/BackButton';
 
-export default function Test() {
+export default function Test({ navigation }) {
   return (
-    <Text>Test page</Text>
+    <View className="mt-20">
+      <BackButton navigation={navigation}/>
+      <Text>Test page</Text>
+    </View>
   )
 }

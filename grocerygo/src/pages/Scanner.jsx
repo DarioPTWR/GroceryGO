@@ -4,7 +4,7 @@ import { Button, StyleSheet, Text, View, Pressable } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import backButton from '../components/backButton';
+import BackButton from '../components/BackButton';
 
 export default function Scanner() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -38,7 +38,7 @@ export default function Scanner() {
   if (hasPermission === null) {
     return (
       <View className="flex-1 justify-center items-center mx-14">
-        <backButton/>
+        <BackButton/>
         <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
         <View 

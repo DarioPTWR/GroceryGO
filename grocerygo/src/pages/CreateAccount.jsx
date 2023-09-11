@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native';
 
 // Import components
-import BackButton from '../components/BackButton2';
+import BackButton from '../components/BackButton';
 import FormInput from '../components/FormInput';
 import AddImage from '../components/AddImage';
 import Button from '../components/Button';

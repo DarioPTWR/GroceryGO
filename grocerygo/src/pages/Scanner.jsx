@@ -4,7 +4,7 @@ import { Button, StyleSheet, Text, View, Pressable } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import BackButton from '../components/BackButton2';
+import BackButton from '../components/BackButton';
 
 export default function Scanner() {
   const [hasPermission, setHasPermission] = useState(null);

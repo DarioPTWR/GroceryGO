@@ -27,7 +27,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      [
+      "expo-router",
         "expo-camera",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."

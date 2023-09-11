@@ -1,21 +1,18 @@
 import { Pressable } from "react-native";
-import { Icon } from "react-native-elements";
+import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 
-export default function backButton(){
+const BackButton = ({ navigation }) =>  {
   return (
     <Pressable
-      className="self-start mx-6"
-      onPress={() => {
-        navigation.navigate("Login");
+      className="self-start ml-4"
+      onPress={()=>{
+        navigation.goBack();
       }}
     >
-      <Icon
-        name="long-arrow-left"
-        color="black"
-        type="font-awesome"
-        className="text-4xl"
-      />
+      <AntDesign name='arrowleft' size={34} color='black'/>
     </Pressable>
   )
 }
+
+export default BackButton;

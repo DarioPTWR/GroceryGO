@@ -5,6 +5,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import BackButton from '../components/BackButton';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Scanner() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -76,7 +77,7 @@ export default function Scanner() {
   }
 
   return (
-    <View className="flex-1 mt-24 mx-14">
+    <SafeAreaView className="flex-1 h-screen px-14 pt-16 bg-main-background">
       <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
       <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
       <BarCodeScanner 
@@ -100,6 +101,6 @@ export default function Scanner() {
           <Text className='text-white text-lg text-center'>Find Out More</Text>
         </Pressable>
       }
-    </View>
+    </SafeAreaView>
   );
 }

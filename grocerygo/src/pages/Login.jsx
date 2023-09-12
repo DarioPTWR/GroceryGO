@@ -6,8 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 const Login = () => {
     const navigation = useNavigation()
     return (
-        <View className="h-screen justify-center bg-[#fff4ec]"> 
-        {/* CHANGE CUSTOM BACKGROUND COLOR */}
+        <View className="h-screen justify-center bg-main-background"> 
             <Image className="object-fill w-32 h-32 mx-auto mb-2" source={require("../../assets/grocerygo.jpg")}/>
             <Text className="text-5xl font-extrabold text-[#1d805b] mx-auto">GROCERYGO</Text>
             <Text className="text-center mb-20 font-bold text-lg bg-rose-700 text-white p-2 mx-3 mt-5">YOUR ULTIMATE GROCERY COMPANION</Text>

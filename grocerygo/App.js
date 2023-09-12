@@ -16,11 +16,15 @@ const Tab = createBottomTabNavigator()
 
 export default function App(){
   return (
-    <SafeAreaProvider className="bg-main-background">
+    <SafeAreaProvider>
       <NavigationContainer>
-        <Tab.Navigator screenOptions={{headerShown: false}}>
-          <Tab.Screen name="Scanner" component={Scanner}></Tab.Screen>
-          <Tab.Screen name="Test" component={Test}></Tab.Screen>
+        <Tab.Navigator 
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Tab.Screen name="Scanner" component={Scanner} />
+          <Tab.Screen name="Test" component={Test} />
           <Tab.Screen name="Login" component={Login} />
           <Tab.Screen name="SignIn" component={SignIn} />
           <Tab.Screen name="CreateAccount" component={CreateAccount} />

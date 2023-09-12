@@ -1,13 +1,18 @@
-import {Text, TextInput, View } from 'react-native';
-import React from 'react';
+import { Text, TextInput, View } from "react-native";
+import React from "react";
 
-const FormInput = ({Title,Input,setInput}) => {
-    return (
-        <View>
-            <Text className="text-rose-500">{Title}</Text>
-            <TextInput className="h-10 border-b-2 text-lg mb-2" onChange={(Input)=>{setInput(Input)}}/>
-        </View>
-    )
-}
+const FormInput = ({ name, setInput }) => {
+  return (
+    <View>
+      <Text className="text-rose-500">{name}</Text>
+      <TextInput
+        className="h-10 border-b-2 text-lg mb-2"
+        onChange={(input) => {
+          setInput(input);
+        }}
+      />
+    </View>
+  );
+};
 
-export default FormInput
+export default FormInput;

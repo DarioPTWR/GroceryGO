@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
@@ -10,13 +10,13 @@ import AddImage from "../components/AddImage";
 import Button from "../components/Button";
 
 const CreateAccount = ({ navigation }) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username)
+    console.log(username, email, password)
     axios
       .post("/addUser", {
         username: username,
@@ -26,12 +26,8 @@ const CreateAccount = ({ navigation }) => {
       .then((res) => {
         console.log(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   };
-
-  React.useEffect(() => {
-    console.log(username)
-  }), [username]
 
   return (
     <SafeAreaView className="h-screen bg-[#fff4ec]">
@@ -43,14 +39,17 @@ const CreateAccount = ({ navigation }) => {
         <View className="w-80 mx-auto mt-4 mb-8">
           <FormInput
             name='Username'
+            input={username}
             setInput={setUsername}
           />
           <FormInput 
             name='Email'
+            input={email}
             setInput={setEmail} 
           />
           <FormInput
             name='Password'
+            input={password}
             setInput={setPassword}
           />
         </View>

@@ -1,26 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-import { createBottomTabNavigator } from
-  "@react-navigation/bottom-tabs";
-import { NavigationContainer, StackActions }
-  from "@react-navigation/native";
-import { SafeAreaProvider } from
-  "react-native-safe-area-context";
-import MaterialCommunityIcons from
-  "@expo/vector-icons/MaterialCommunityIcons";
-
+// Import pages
+import Login from "./src/pages/Login";
+import SignIn from "./src/pages/SignIn";
+import CreateAccount from "./src/pages/CreateAccount";
 import Preference from './src/pages/Preference'
+import Scanner from "./src/pages/Scanner";
+import Test from "./src/pages/Test";
 
-
-// export default function App() {
-//   return (
-//     <View className="">
-//       <Text className="text-1xl">tesdast</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
 const Tab = createBottomTabNavigator();
 // Create the Bottom Tab
 <Tab.Navigator className = 'bg-white'
@@ -42,16 +34,23 @@ const Tab = createBottomTabNavigator();
   })}
 ></Tab.Navigator>
 
-const App = () => {
+export default function App(){
   return (
-    // Avoid things like notches with SafeAreaProvider
-    <SafeAreaProvider className = 'bg-main-green'>
+    <SafeAreaProvider>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Preference" component={Preference}></Tab.Screen>
+        <Tab.Navigator 
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Tab.Screen name="Scanner" component={Scanner} />
+          <Tab.Screen name="Test" component={Test} />
+          <Tab.Screen name="Login" component={Login} />
+          <Tab.Screen name="SignIn" component={SignIn} />
+          <Tab.Screen name="CreateAccount" component={CreateAccount} />
+          <Tab.Screen name="Preference" component={Preference} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
-  );
+  )
 }
-export default App

@@ -27,7 +27,7 @@ const CreateAccount = () => {
                     <FormInput Title={"Password"} Input={password} setInput={setPassword}/>
                 </View>
             </KeyboardAvoidingView>
-            <Button buttonText="Sign Up" onPress={()=>{console.log("Create" + email)}}/>
+            <Button buttonText="Sign Up" onPress={()=>{console.log(email)}}/>
         </SafeAreaView>
     )
 }

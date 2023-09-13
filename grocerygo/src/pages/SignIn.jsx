@@ -9,12 +9,10 @@ import { TouchableOpacity, GestureHandlerRootView } from 'react-native-gesture-h
 // Import components
 import BackButton from '../components/BackButton';
 import FormInput from '../components/FormInput';
-
-const onPressSignIn = () => {
-    console.log("Signed In")
-};
-
 const SignIn = () => {
+    const onPressSignIn = () => {
+        console.log("Signed In")
+    };
     const [emailUsername, setEmailUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigation = useNavigation()
@@ -25,7 +23,7 @@ const SignIn = () => {
             <Text className="mx-10 text-xl mb-20">We're glad to have you back.</Text>
             <View className="w-80 mx-auto mb-10">
                     <FormInput Title={"Email / Username"} Input={emailUsername} setInput={setEmailUsername}/>
-                    <FormInput Title={"Password"} Input={password} secureTextEntry={true} setInput={setPassword}/>
+                    <FormInput Title={"Password"} Input={password} setInput={setPassword}/>
                     <GestureHandlerRootView>
                         <TouchableOpacity>
                             <Text>Forgot Password?</Text>

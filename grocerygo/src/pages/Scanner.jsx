@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState({});
 
   React.useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -23,7 +23,7 @@ export default function Scanner({ navigation }) {
 
   const handleBarCodeScanned = ({ type, data }) => {
     axios.get(
-      `https://api.upcdatabase.org/product/${data}?apikey=6D00C35F312273F6627F7266B6D3A333` // add to backend
+      `https://api.spoonacular.com/food/products/upc/${data}?apiKey=edb8d0432df44f4983f00ce195392a1e`
     )
       .then(res => {
         setScanned(true);
@@ -38,7 +38,7 @@ export default function Scanner({ navigation }) {
 
   if (hasPermission === null) {
     return (
-      <View className="flex-1 justify-center items-center mx-14">
+      <SafeAreaView className="flex-1 h-screen px-14 pt-16 bg-main-background">
         <BackButton/>
         <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
@@ -53,12 +53,13 @@ export default function Scanner({ navigation }) {
         >
           <Text className='text-white text-lg text-center'>Scan Product</Text>
         </Pressable>
-      </View>
+      </SafeAreaView>
     )
   }
+  
   if (hasPermission === false) {
     return (
-      <View className="flex-1 justify-center items-center mx-14">
+      <SafeAreaView className="flex-1 h-screen px-14 pt-16 bg-main-background">
         <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
         <View 
@@ -72,7 +73,7 @@ export default function Scanner({ navigation }) {
         >
           <Text className='text-white text-lg text-center'>Scan Product</Text>
         </Pressable>
-      </View>
+      </SafeAreaView>
     )
   }
 

@@ -1,10 +1,9 @@
 import React from 'react'
 import {View, Text, Pressable, Image} from 'react-native'
 import Button from '../components/Button'
-import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
-const Login = () => {
-    const navigation = useNavigation()
+const Login = ({ navigation }) => {
     return (
         <View className="h-screen justify-center bg-main-background"> 
             <Image className="object-fill w-32 h-32 mx-auto mb-2" source={require("../../assets/grocerygo.jpg")}/>

@@ -1,5 +1,6 @@
 import React, { useState} from "react";
 import { View, Text, ScrollView, TouchableOpacity, TextInput, KeyboardAvoidingView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const preferences = [
   "Gluten-Free",
@@ -66,54 +67,54 @@ const Preference = () => {
     setCustomPreference(text);
   };
 
-
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-      enabled
-      keyboardVerticalOffset={100}
-      className="flex-1 bg-main-background"
-    >
-      <ScrollView className="flex-1 bg-main-background">
-        <View className="flex-1 m-2">
-          <Text className="text-3xl font-bold text-black px-4">
-            Product Preferences
-          </Text>
-          <Text className="text-base font-medium text-black px-4 pt-2">
-            We will recommend products based on your needs.
-          </Text>
-        </View>
-        <View className="mt-2 ">
-          {preferences.map((preference, index) => (
-            <PreferenceButton
-              key={index}
-              preference={preference}
-              isSelected={selectedPreferences.includes(preference)}
-              onPress={togglePreference}
-            />
-          ))}
-        </View>
-        <Text className = 'text-xl font-bold m-3'>Any Other Allergies/Preferences?</Text>
-        <TextInput
-          placeholder="Add Custom Preference"
-          value={customPreference}
-          onChangeText={handleCustomPreferenceChange}
-          className="border-2 border-black rounded-lg m-3 p-5"
-
-        />
-        {/* Conditional rendering of buttons */}
-        <View className=" mt-2 flex flex-row justify-around">
-          <TouchableOpacity
-            className="p-4 border-black border-2  bg-main-green "
-            onPress={handleSubmit}
-          >
-            <Text className="text-xl font-bold text-white ">
-              Submit Preferences
+    <SafeAreaView className="h-screen bg-[#fff4ec]">
+      <KeyboardAvoidingView
+        behavior="padding"
+        enabled
+        keyboardVerticalOffset={100}
+        className="flex-1 bg-main-background"
+      >
+        <ScrollView className="flex-1 bg-main-background">
+          <View className="flex-1 m-2">
+            <Text className="text-3xl font-bold text-black px-4">
+              Product Preferences
             </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+            <Text className="text-base font-medium text-black px-4 pt-2">
+              We will recommend products based on your needs.
+            </Text>
+          </View>
+          <View className="mt-2 ">
+            {preferences.map((preference, index) => (
+              <PreferenceButton
+                key={index}
+                preference={preference}
+                isSelected={selectedPreferences.includes(preference)}
+                onPress={togglePreference}
+              />
+            ))}
+          </View>
+          <Text className = 'text-xl font-bold m-3'>Any Other Allergies/Preferences?</Text>
+          <TextInput
+            placeholder="Add Custom Preference"
+            value={customPreference}
+            onChangeText={handleCustomPreferenceChange}
+            className="border-2 border-black rounded-lg m-3 p-5"
+          />
+          {/* Conditional rendering of buttons */}
+          <View className=" mt-2 flex flex-row justify-around">
+            <TouchableOpacity
+              className="p-4 border-black border-2  bg-main-green "
+              onPress={handleSubmit}
+            >
+              <Text className="text-xl font-bold text-white ">
+                Submit Preferences
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

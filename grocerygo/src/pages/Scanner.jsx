@@ -22,9 +22,7 @@ export default function Scanner({ navigation }) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    axios.get(
-      `https://api.spoonacular.com/food/products/upc/${data}?apiKey=edb8d0432df44f4983f00ce195392a1e`
-    )
+    axios.get(`/getInfoByUPC/${data}`)
       .then(res => {
         setScanned(true);
         setProduct(res.data)
@@ -32,7 +30,7 @@ export default function Scanner({ navigation }) {
       .catch(err => {
         setScanned(true);
         setProduct({title: "Not Found"})
-        alert(err)
+        alert(err);
       })
   };
 
@@ -89,12 +87,12 @@ export default function Scanner({ navigation }) {
       {scanned && <Text className="text-center font-extrabold text-lg text-md text-main-red">PRODUCT SCANNED:</Text>}
       {scanned && <Text className="text-center font-extrabold text-xl text-main-red">{product.title}</Text>}
       <Pressable 
-        className="bg-main-green rounded-lg p-3 w-full mt-8" 
+        className="bg-main-green rounded-lg p-3 w-full mt-8 active:scale-95 transition-all" 
         onPress={() => setScanned(false)}
       >
         <Text className='text-white text-lg text-center'>Scan {scanned ? 'Again' : 'Product'}</Text>
       </Pressable>
-      {scanned && 
+      {scanned && product.title !== "Not Found" && 
         <Pressable 
           className="bg-main-green rounded-lg p-3 w-full mt-6" 
           onPress={() => navigation.navigate("Test", {product: product})}

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const usersDB = require('../model/usersDB');
+const spoonacularAPI = require('../model/spoonacularAPI');
 
 const app = express();
 
@@ -33,6 +34,17 @@ app.post('/verifyUser', (req, res) => {
             } else {
                 res.status(500).send(err)
             }
+        }else{
+            res.status(200).send(result)
+        }
+    })
+})
+
+// spoonacularAPI
+app.get('/getInfoByUPC/:upc', (req, res) => {
+    spoonacularAPI.getInfoByUPC(req.params.upc, (err, result) => {
+        if(err){
+            res.status(500).send(err)
         }else{
             res.status(200).send(result)
         }

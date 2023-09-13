@@ -2,28 +2,53 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 // Import pages
 import Login from "./src/pages/Login";
 import SignIn from "./src/pages/SignIn";
 import CreateAccount from "./src/pages/CreateAccount";
-
+import Preference from './src/pages/Preference'
 import Scanner from "./src/pages/Scanner";
 import Test from "./src/pages/Test";
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator();
+// Create the Bottom Tab
+<Tab.Navigator className = 'bg-white'
+  screenOptions={({ route }) => ({
+    tabBarIcon: ({ color, size }) => {
+      let iconName;
+      if (route.name === "Preference") {
+        iconName = "Preference";
+      } 
+      return (
+        <MaterialCommunityIcons
+          name={iconName}
+          size={30}
+          color={color}
+          style={{ height: 30 }}
+        />
+      );
+    }
+  })}
+></Tab.Navigator>
 
 export default function App(){
   return (
-    <SafeAreaProvider className="bg-main-background">
+    <SafeAreaProvider>
       <NavigationContainer>
-        <Tab.Navigator screenOptions={{headerShown: false}}>
-          <Tab.Screen name="Scanner" component={Scanner}></Tab.Screen>
-          <Tab.Screen name="Test" component={Test}></Tab.Screen>
+        <Tab.Navigator 
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Tab.Screen name="Scanner" component={Scanner} />
+          <Tab.Screen name="Test" component={Test} />
           <Tab.Screen name="Login" component={Login} />
           <Tab.Screen name="SignIn" component={SignIn} />
           <Tab.Screen name="CreateAccount" component={CreateAccount} />
+          <Tab.Screen name="Preference" component={Preference} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

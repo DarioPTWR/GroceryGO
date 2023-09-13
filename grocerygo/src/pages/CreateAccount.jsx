@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {View, Text, KeyboardAvoidingView} from 'react-native'
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from '@react-navigation/native';
 
 // Import components
 import BackButton from '../components/BackButton';
@@ -9,8 +8,7 @@ import FormInput from '../components/FormInput';
 import AddImage from '../components/AddImage';
 import Button from '../components/Button';
 
-const CreateAccount = () => {
-    const navigation = useNavigation();
+const CreateAccount = ({ navigation }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

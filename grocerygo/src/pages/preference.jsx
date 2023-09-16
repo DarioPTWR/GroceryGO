@@ -1,11 +1,10 @@
 import React, { useState} from "react";
 import { View, Text, ScrollView, TouchableOpacity, TextInput, KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as Font from "expo-font";
+
 // Import components
 import Button from "../components/Button";
 import BackButton from "../components/BackButton";
-import UseFont from "../components/UseFont";
 
 const preferences = [
   "Gluten-Free",
@@ -18,9 +17,6 @@ const preferences = [
 ];
 
 const PreferenceButton = ({ preference, isSelected, onPress }) => {
-  const LoadFonts = async () => {
-    await useFonts();
-  };
   return (
     <TouchableOpacity 
       className="flex flex-row border-solid border-2 m-3 p-3 rounded-lg "
@@ -86,7 +82,7 @@ const Preference = ({ navigation }) => {
         <ScrollView className="flex-1 bg-main-background">
           <BackButton navigation={navigation}/>
           <View className="flex-1 m-2 mt-4">
-            <Text className="text-6xl font-bold text-black px-4 font-primary">
+            <Text className="text-6xl font-bold text-black px-4">
               Product Preferences
             </Text>
             <Text className="text-base font-medium text-black px-4 pt-2">

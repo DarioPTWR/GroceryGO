@@ -12,7 +12,8 @@ app.post('/addUser', (req, res) => {
     usersDB.addUser(req.body, (err, result) => {
         if(err){
             if(err.code === "23505"){
-                res.status(409).send("User already exists.")
+                errorVar = err.constraint.split("_")[1];
+                res.status(409).send(errorVar[0].toUpperCase() + errorVar.slice(1) + " already exists.")
             }else{
                 res.status(500).send("An error occurred. Please try again later.")
             }

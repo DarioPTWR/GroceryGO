@@ -10,8 +10,6 @@ import AddImage from "../components/AddImage";
 import Button from "../components/Button";
 import baseURL from "../baseURL";
 
-
-
 const CreateAccount = ({ navigation }) => {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -73,18 +71,21 @@ const CreateAccount = ({ navigation }) => {
             name='Username'
             input={username}
             setInput={setUsername}
+            secure = {false}
             validate={validateUsername}
           />
           <FormInput 
             name='Email'
             input={email}
             setInput={setEmail} 
+            secure = {false}
             validate={validateEmail}
           />
           <FormInput
             name='Password'
             input={password}
             setInput={setPassword}
+            secure = {true}
             validate={validatePassword}
           />
         </View>

@@ -24,8 +24,8 @@ const SignIn = () => {
             <Text className="font-bold text-6xl mt-9 mx-9">Welcome Back!</Text>
             <Text className="mx-10 text-xl mb-20">We're glad to have you back.</Text>
             <View className="w-80 mx-auto mb-10">
-                    <FormInput Title={"Email / Username"} Input={emailUsername} setInput={setEmailUsername}/>
-                    <FormInput Title={"Password"} Input={password} secureTextEntry={true} setInput={setPassword}/>
+                    <FormInput name={"Email / Username"} Input={emailUsername} setInput={setEmailUsername}/>
+                    <FormInput name={"Password"} Input={password} secureTextEntry={true} setInput={setPassword}/>
                     <GestureHandlerRootView>
                         <TouchableOpacity>
                             <Text>Forgot Password?</Text>

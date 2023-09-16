@@ -1,6 +1,11 @@
 import React, { useState} from "react";
 import { View, Text, ScrollView, TouchableOpacity, TextInput, KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Font from "expo-font";
+// Import components
+import Button from "../components/Button";
+import BackButton from "../components/BackButton";
+import UseFont from "../components/UseFont";
 
 const preferences = [
   "Gluten-Free",
@@ -13,6 +18,9 @@ const preferences = [
 ];
 
 const PreferenceButton = ({ preference, isSelected, onPress }) => {
+  const LoadFonts = async () => {
+    await useFonts();
+  };
   return (
     <TouchableOpacity 
       className="flex flex-row border-solid border-2 m-3 p-3 rounded-lg "
@@ -30,7 +38,7 @@ const PreferenceButton = ({ preference, isSelected, onPress }) => {
 // add multiple buttons with different props
 
 
-const Preference = () => {
+const Preference = ({ navigation }) => {
   // declare vars and set their state
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   // const [submittedPreferences, setSubmittedPreferences] = useState([]);
@@ -76,8 +84,9 @@ const Preference = () => {
         className="flex-1 bg-main-background"
       >
         <ScrollView className="flex-1 bg-main-background">
-          <View className="flex-1 m-2">
-            <Text className="text-3xl font-bold text-black px-4">
+          <BackButton navigation={navigation}/>
+          <View className="flex-1 m-2 mt-4">
+            <Text className="text-6xl font-bold text-black px-4 font-primary">
               Product Preferences
             </Text>
             <Text className="text-base font-medium text-black px-4 pt-2">
@@ -102,15 +111,8 @@ const Preference = () => {
             className="border-2 border-black rounded-lg m-3 p-5"
           />
           {/* Conditional rendering of buttons */}
-          <View className=" mt-2 flex flex-row justify-around">
-            <TouchableOpacity
-              className="p-4 border-black border-2  bg-main-green "
-              onPress={handleSubmit}
-            >
-              <Text className="text-xl font-bold text-white ">
-                Submit Preferences
-              </Text>
-            </TouchableOpacity>
+          <View className="mb-20 mt-4">
+          <Button onPress={handleSubmit} buttonText={"Submit Preferences"}/>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

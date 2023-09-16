@@ -1,5 +1,6 @@
 CREATE TABLE users (
     user_id serial PRIMARY KEY,
+    imageuri VARCHAR(255),
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL

@@ -2,7 +2,8 @@ const db = require("../db");
 
 const usersDB = {
     addUser: function(details, callback){
-        db.none('INSERT INTO users(username, email, password) VALUES($1, $2, $3)', [
+        db.none('INSERT INTO users(imageuri,username, email, password) VALUES($1, $2, $3, $4)', [
+            details.imageuri,
             details.username,
             details.email,
             details.password,

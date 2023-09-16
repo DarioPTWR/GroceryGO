@@ -4,6 +4,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useFonts } from 'expo-font';
 
 // Import pages
 import Login from "./src/pages/Login";
@@ -42,6 +43,7 @@ export default function App(){
           screenOptions={{
             headerShown: false
           }}
+          initialRouteName='Login'
         >
           <Tab.Screen name="Scanner" component={Scanner} />
           <Tab.Screen name="Test" component={Test} />

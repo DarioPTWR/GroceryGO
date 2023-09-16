@@ -2,7 +2,8 @@ const db = require("../db");
 
 const usersDB = {
     addUser: function(details, callback){
-        db.none('INSERT INTO users(username, email, password) VALUES($1, $2, $3)', [
+        db.none('INSERT INTO users(imageuri,username, email, password) VALUES($1, $2, $3, $4)', [
+            details.imageuri,
             details.username,
             details.email,
             details.password,
@@ -12,8 +13,12 @@ const usersDB = {
     },
 
     verifyUser: function(details, callback){
-        db.one('SELECT user_id, username, email FROM users WHERE username = $1 AND password = $2;', [
-            details.username, 
+        sqlStmt = 'SELECT user_id, username, email FROM users WHERE username = $1 AND password = $2;'
+        if (details.emailUsername.includes(".com") || details.emailUsername.includes("@")) {
+            sqlStmt = 'SELECT user_id, username, email FROM users WHERE email = $1 AND password = $2;';
+        }
+        db.one(sqlStmt, [
+            details.emailUsername, 
             details.password,
         ])
             .then(result => callback(null, result))

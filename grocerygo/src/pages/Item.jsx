@@ -6,6 +6,7 @@ import {
   ScrollView,
   Pressable,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -16,18 +17,6 @@ import { black } from "tailwindcss/colors";
 import { useRoute } from "@react-navigation/native";
 import axios from "axios";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// Creating the ingredient list
-const ingredients = [
-  "Milk",
-  "Sugar",
-  "Skim Milk Powder",
-  "Corn Syrup",
-  "Stabilizers and Emulsifiers",
-  "Artificial Flavoring",
-  "Food Coloring",
-  "Salt",
-];
 
 // Creating the preference list
 const preferences = [
@@ -41,6 +30,42 @@ const preferences = [
 const Item = ({ navigation }) => {
   const route = useRoute();
   const product = route.params?.product;
+  
+  if(!product) {
+    return (
+      <>
+      <Text className="text-4xl font-extrabold text-center mt-44 mx-14 mb-12">
+        You have not scanned a product!
+      </Text>
+      <ItemButton buttonText={"To Scanner"} onPress={() => navigation.navigate('Scanner')} />
+      </>
+    )
+  }
+
+  const checkUnfulfilled = (preferences) => {
+    const preferencesMapped = preferences.map(preference => {
+      switch(preference){
+        case 'Gluten Free':
+          return 'gluten_free'
+        case 'Lactose Intolerant':
+          return 'dairy_free'
+        case 'Vegetarian Based':
+          return 'vegetarian'
+        case 'Peanut - Free':
+          return 'peanut_free'
+        case 'Grain - Free':
+          return 'grain_free'
+        case 'Wheat - Free':
+          return 'wheat_free'
+      }
+    })
+
+    const badges = product.badges
+    let unfulfilledPreferences = preferencesMapped.filter((o) => badges.indexOf(o) === -1);
+    return unfulfilledPreferences
+  }
+
+  const unfulfilledPreferences = checkUnfulfilled(preferences)
 
   return (
     <SafeAreaView>
@@ -55,7 +80,7 @@ const Item = ({ navigation }) => {
             style={{ fontSize: 16 }}
             className="text-md font-bold text-[#D44C3D] mt-2"
           >
-            DESSERT : $6.50
+            {product.breadcrumbs[0]}
           </Text>
           <View style={{ justifyContent: "flex-end", flexDirection: "row" }}>
             <AntDesign
@@ -89,15 +114,15 @@ const Item = ({ navigation }) => {
             style={{ fontSize: 16 }}
             className="font-bold text-[#D44C3D] mt-4"
           >
-            PREFERENCE MATCH : NOT SUITABLE
+            PREFERENCE MATCH : {unfulfilledPreferences ? '' : 'NOT'} SUITABLE
           </Text>
           <Text style={{ fontSize: 16 }} className="mt-4 mb-6">
-            {preferences.map((preference, index) => (
+            {unfulfilledPreferences.map((preference, index) => (
               <React.Fragment key={index}>
                 <Text>
                   {preference}
                 </Text>
-                {index !== preferences.length - 1 ? ", " : ""}
+                {index !== unfulfilledPreferences.length - 1 ? ", " : ""}
               </React.Fragment>
             ))}
           </Text>

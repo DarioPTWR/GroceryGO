@@ -13,7 +13,7 @@ import CreateAccount from "./src/pages/CreateAccount";
 import Preference from './src/pages/Preference'
 import Scanner from "./src/pages/Scanner";
 import Test from "./src/pages/Test";
-import Item from "./src/pages/Item
+import Item from "./src/pages/Item";
 
 const Tab = createBottomTabNavigator();
 // Create the Bottom Tab

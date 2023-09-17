@@ -7,7 +7,7 @@ import productImg from '../../assets/product-img.jpg';
 
 // Importing components
 import BackButton from "../components/WhiteBackButton"
-import Button from "../components/Button"
+import ItemButton from "../components/ItemButton"
 import { black } from 'tailwindcss/colors';
 
 // Creating the ingredient list
@@ -58,8 +58,8 @@ const Item = ({navigation}) => {
                 </React.Fragment>
                 ))}
             </Text>
-            <Button buttonText="Explore Similar Products" />
-            <Button buttonText="Add to Cart" />
+            <ItemButton buttonText="Explore Similar Products" />
+            <ItemButton buttonText="Add to Cart" />
             </View>
         </ScrollView>
     )

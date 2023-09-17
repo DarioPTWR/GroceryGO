@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [product, setProduct] = useState('');
+  const [product, setProduct] = useState({});
 
   React.useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -22,9 +22,7 @@ export default function Scanner({ navigation }) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    axios.get(
-      `https://api.upcdatabase.org/product/${data}?apikey=6D00C35F312273F6627F7266B6D3A333` // add to backend
-    )
+    axios.get(`/getInfoByUPC/${data}`)
       .then(res => {
         setScanned(true);
         setProduct(res.data)
@@ -32,13 +30,13 @@ export default function Scanner({ navigation }) {
       .catch(err => {
         setScanned(true);
         setProduct({title: "Not Found"})
-        alert(err)
+        alert(err);
       })
   };
 
   if (hasPermission === null) {
     return (
-      <View className="flex-1 justify-center items-center mx-14">
+      <SafeAreaView className="flex-1 h-screen px-14 pt-16 bg-main-background">
         <BackButton/>
         <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
@@ -53,12 +51,13 @@ export default function Scanner({ navigation }) {
         >
           <Text className='text-white text-lg text-center'>Scan Product</Text>
         </Pressable>
-      </View>
+      </SafeAreaView>
     )
   }
+  
   if (hasPermission === false) {
     return (
-      <View className="flex-1 justify-center items-center mx-14">
+      <SafeAreaView className="flex-1 h-screen px-14 pt-16 bg-main-background">
         <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
         <View 
@@ -72,7 +71,7 @@ export default function Scanner({ navigation }) {
         >
           <Text className='text-white text-lg text-center'>Scan Product</Text>
         </Pressable>
-      </View>
+      </SafeAreaView>
     )
   }
 
@@ -88,12 +87,12 @@ export default function Scanner({ navigation }) {
       {scanned && <Text className="text-center font-extrabold text-lg text-md text-main-red">PRODUCT SCANNED:</Text>}
       {scanned && <Text className="text-center font-extrabold text-xl text-main-red">{product.title}</Text>}
       <Pressable 
-        className="bg-main-green rounded-lg p-3 w-full mt-8" 
+        className="bg-main-green rounded-lg p-3 w-full mt-8 active:scale-95 transition-all" 
         onPress={() => setScanned(false)}
       >
         <Text className='text-white text-lg text-center'>Scan {scanned ? 'Again' : 'Product'}</Text>
       </Pressable>
-      {scanned && 
+      {scanned && product.title !== "Not Found" && 
         <Pressable 
           className="bg-main-green rounded-lg p-3 w-full mt-6" 
           onPress={() => navigation.navigate("Test", {product: product})}

@@ -6,6 +6,6 @@ export default function Test() {
   const route = useRoute()
   const product = route.params?.product
   return (
-    <Text>{product.description}</Text>
+    <Text>{product.badges}</Text>
   )
 }

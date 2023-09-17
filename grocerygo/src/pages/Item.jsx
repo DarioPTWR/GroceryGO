@@ -6,7 +6,7 @@ import {AntDesign} from "@expo/vector-icons";
 import productImg from '../../assets/product-img.jpg';
 
 // Importing components
-import BackButton from "../components/WhiteBackButton"
+import WhiteBackButton from "../components/WhiteBackButton"
 import ItemButton from "../components/ItemButton"
 import { black } from 'tailwindcss/colors';
 

@@ -13,6 +13,7 @@ import CreateAccount from "./src/pages/CreateAccount";
 import Preference from './src/pages/Preference'
 import Scanner from "./src/pages/Scanner";
 import Test from "./src/pages/Test";
+import Item from "./src/pages/Item";
 
 const Tab = createBottomTabNavigator();
 // Create the Bottom Tab
@@ -51,6 +52,7 @@ export default function App(){
           <Tab.Screen name="SignIn" component={SignIn} />
           <Tab.Screen name="CreateAccount" component={CreateAccount} />
           <Tab.Screen name="Preference" component={Preference} />
+          <Tab.Screen name="Item" component={Item} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

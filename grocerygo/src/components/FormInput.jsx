@@ -18,4 +18,5 @@ const FormInput = ({ name, input, setInput, secure, validate }) => {
   );
 };
 
+
 export default FormInput;

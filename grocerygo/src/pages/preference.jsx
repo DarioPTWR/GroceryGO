@@ -1,25 +1,39 @@
-import React, { useState} from "react";
+import db from "../../api/firebaseConfig.js";
+import { collection, doc, getDoc, setDoc, updateDoc, onSnapshot } from "firebase/firestore";
+import React, { useState, useEffect} from "react";
 import { View, Text, ScrollView, TouchableOpacity, TextInput, KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+
 
 // Import components
 import Button from "../components/Button";
 import BackButton from "../components/BackButton";
 
-const preferences = [
-  "Gluten-Free",
-  "Lactose Intolerant",
-  "Healthier Choice",
-  "Vegetarian Based",
-  "Halal Certified",
-  "Spice Intolerant",
-  "Nuts Free",
-];
 
+
+
+const preferences = [
+        "Egg Free",
+        "Wheat Free",
+        "Grain Free",
+        "Peanut Free",
+        "Primal",
+        "Vegetarian",
+        "Nut Free",
+        "Vegan",
+        "Pescetarian",
+        "Dairy Free",
+        "Paleo",
+        "Gluten Free"
+    ]
+
+// add a button for each preference in the preferences array 
 const PreferenceButton = ({ preference, isSelected, onPress }) => {
   return (
     <TouchableOpacity 
       className="flex flex-row border-solid border-2 m-3 p-3 rounded-lg "
+      // onPress is a function that takes in a preference and toggles it 
       onPress={() => onPress(preference)}
     >
       <View
@@ -31,7 +45,6 @@ const PreferenceButton = ({ preference, isSelected, onPress }) => {
     </TouchableOpacity>
   );
 };
-// add multiple buttons with different props
 
 
 const Preference = ({ navigation }) => {
@@ -39,6 +52,22 @@ const Preference = ({ navigation }) => {
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   // const [submittedPreferences, setSubmittedPreferences] = useState([]);
   const [customPreference, setCustomPreference] = useState(""); // State for custom preference input
+  useEffect(() => {
+    const userPreferencesRef = doc(db, "Preferences", "Joe"); // Replace "user_id_here" with the actual user ID
+    const unsubscribe = onSnapshot(userPreferencesRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const userData = docSnapshot.data();
+        const updatedSelectedPreferences = preferences.filter(
+          (preference) => userData[preference]
+        );
+        setSelectedPreferences(updatedSelectedPreferences);
+      }
+    });
+
+    return unsubscribe; // Cleanup function to unsubscribe from the snapshot listener
+  }, []);
+
+
   const togglePreference = (preference) => {
     if (selectedPreferences.includes(preference)) {
       setSelectedPreferences(
@@ -49,22 +78,46 @@ const Preference = ({ navigation }) => {
     }
   };
 
+
   // Function to handle the "Submit" button click
-  const handleSubmit = () => {
-      setSelectedPreferences((prevSelectedPreferences) => {
-        // Store the current selected preferences as submitted preferences
-        let finalPreferences = [...prevSelectedPreferences];
+  const handleSubmit =  async () => {
+    // Get the user preferences document from Firestore can replace joe with user id 
+    // this is the path to the document
+    const userPreferencesRef = doc(db, "Preferences", "Joe"); 
+    // Get the user preferences document
+    const userPreferencesDoc = await getDoc(userPreferencesRef);
+    // Get the data from the user preferences document or an empty object if it does not exist
+    const userPreferencesData = userPreferencesDoc.exists() ? userPreferencesDoc.data() : {};
 
-        // If customPreference is not empty, add it to the selected preferences
-        if (customPreference.trim() !== "") {
-          finalPreferences.push(customPreference);
-          setCustomPreference(""); // Clear the input field
-        }
+    // Create a copy of the user preferences data
+    const updatedUserPreferences = { ...userPreferencesData };
+    // Update the preferences based on the selectedPreferences array
+    preferences.forEach((preference) => {
+      updatedUserPreferences[preference] =
+        selectedPreferences.includes(preference);
+    });
+    // Update or insert the user preferences document
+    if (userPreferencesDoc.exists()) {
+      //print out the updated user preferences
+      await updateDoc(userPreferencesRef, updatedUserPreferences);
+      console.log(userPreferencesData);
+    } else {
+      await setDoc(userPreferencesRef, updatedUserPreferences);
+      console.log(userPreferencesData);
+    }
+    setSelectedPreferences((prevSelectedPreferences) => {
+      // Store the current selected preferences as submitted preferences
+      let finalPreferences = [...prevSelectedPreferences];
 
-        console.log("Submitted Preferences:", finalPreferences);
-        return finalPreferences;
-      });
+      // If customPreference is not empty, add it to the selected preferences
+      if (customPreference.trim() !== "") {
+        finalPreferences.push(customPreference);
+        setCustomPreference(""); // Clear the input field
+      }
 
+      // console.log("Submitted Preferences:", finalPreferences);
+      return finalPreferences;
+    });
   };
 
   const handleCustomPreferenceChange = (text) => {
@@ -80,9 +133,9 @@ const Preference = ({ navigation }) => {
         className="flex-1 bg-main-background"
       >
         <ScrollView className="flex-1 bg-main-background">
-          <BackButton navigation={navigation}/>
+          <BackButton navigation={navigation} />
           <View className="flex-1 m-2 mt-4">
-            <Text className="text-6xl font-bold text-black px-4">
+            <Text className="text-5xl font-bold text-black px-4">
               Product Preferences
             </Text>
             <Text className="text-base font-medium text-black px-4 pt-2">
@@ -99,7 +152,9 @@ const Preference = ({ navigation }) => {
               />
             ))}
           </View>
-          <Text className = 'text-xl font-bold m-3'>Any Other Allergies/Preferences?</Text>
+          <Text className="text-xl font-bold m-3">
+            Any Other Allergies/Preferences?
+          </Text>
           <TextInput
             placeholder="Add Custom Preference"
             value={customPreference}
@@ -108,7 +163,17 @@ const Preference = ({ navigation }) => {
           />
           {/* Conditional rendering of buttons */}
           <View className="mb-20 mt-4">
-          <Button onPress={handleSubmit} buttonText={"Submit Preferences"}/>
+            <TouchableOpacity
+              className="flex flex-col items-center"
+              onPress={handleSubmit}
+              buttonText={"Submit Preferences"}
+            >
+              <View className="bg-[#355D4E] py-2 w-3/5 max-w-lg rounded-md">
+                <Text className="text-white text-lg text-center">
+                  Submit Preferences
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

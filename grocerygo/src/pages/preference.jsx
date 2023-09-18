@@ -53,7 +53,7 @@ const Preference = ({ navigation }) => {
   // const [submittedPreferences, setSubmittedPreferences] = useState([]);
   const [customPreference, setCustomPreference] = useState(""); // State for custom preference input
   useEffect(() => {
-    const userPreferencesRef = doc(db, "Preferences", "Joe"); // Replace "user_id_here" with the actual user ID
+    const userPreferencesRef = doc(db, "Preferences", "Joe"); // Replace "Joe" with the actual user ID
     const unsubscribe = onSnapshot(userPreferencesRef, (docSnapshot) => {
       if (docSnapshot.exists()) {
         const userData = docSnapshot.data();

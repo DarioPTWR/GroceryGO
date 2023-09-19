@@ -11,10 +11,12 @@ import Login from "./src/pages/Login";
 import SignIn from "./src/pages/SignIn";
 import CreateAccount from "./src/pages/CreateAccount";
 import Preference from './src/pages/Preference'
-// import Scanner from "./src/pages/Scanner";
-import Test from "./src/pages/Test";
+import Scanner from "./src/pages/Scanner";
+import Comparison from './src/pages/Comparison';
+// import Test from "./src/pages/Test";
 import Profile from "./src/pages/Profile";
 import Item from "./src/pages/Item";
+
 
 const Tab = createBottomTabNavigator();
 // Create the Bottom Tab
@@ -49,6 +51,7 @@ export default function App(){
         >
           {/* <Tab.Screen name="Scanner" component={Scanner} /> */}
           {/* <Tab.Screen name="Test" component={Test} /> */}
+          <Tab.Screen name="Comparison" component={Comparison} />
           <Tab.Screen name="Login" component={Login} />
           <Tab.Screen name="SignIn" component={SignIn} />
           <Tab.Screen name="CreateAccount" component={CreateAccount} />

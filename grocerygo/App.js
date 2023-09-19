@@ -11,7 +11,7 @@ import Login from "./src/pages/Login";
 import SignIn from "./src/pages/SignIn";
 import CreateAccount from "./src/pages/CreateAccount";
 import Preference from './src/pages/Preference'
-// import Scanner from "./src/pages/Scanner";
+import Scanner from "./src/pages/Scanner";
 import Test from "./src/pages/Test";
 import Profile from "./src/pages/Profile";
 import Item from "./src/pages/Item";
@@ -47,7 +47,7 @@ export default function App(){
           }}
           initialRouteName='Login'
         >
-          {/* <Tab.Screen name="Scanner" component={Scanner} /> */}
+          <Tab.Screen name="Scanner" component={Scanner} />
           {/* <Tab.Screen name="Test" component={Test} /> */}
           <Tab.Screen name="Login" component={Login} />
           <Tab.Screen name="SignIn" component={SignIn} />

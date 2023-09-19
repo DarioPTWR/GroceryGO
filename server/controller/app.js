@@ -44,6 +44,7 @@ app.get('/getInfoByUPC/:upc', (req, res) => {
         if(err){
             res.status(500).send(err)
         }else{
+            console.log(result)
             res.status(200).send(result)
         }
     })

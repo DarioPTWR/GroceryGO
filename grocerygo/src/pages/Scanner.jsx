@@ -11,6 +11,7 @@ import baseURL from '../baseURL';
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({});
   
   React.useEffect(() => {
@@ -23,9 +24,12 @@ export default function Scanner({ navigation }) {
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
-    axios.get(`${baseURL}/getInfoByUPC/${data}`)
+    setScanned(true)
+    setLoading(true)
+    axios.get(`https://api.spoonacular.com/food/products/upc/${data}?apiKey=edb8d0432df44f4983f00ce195392a1e`)
       .then(res => {
-        setScanned(true);
+        console.log(res.data)
+        setLoading(false)
         if(res.data.status === "failure"){
           setProduct({title: "Not Found"})
         }else{
@@ -33,7 +37,7 @@ export default function Scanner({ navigation }) {
         }
       })
       .catch(err => {
-        setScanned(true);
+        setLoading(false)
         setProduct({title: "Not Found"})
         alert(err);
       })
@@ -89,16 +93,20 @@ export default function Scanner({ navigation }) {
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} 
           className="w-full aspect-square my-6"
         />
-        {!scanned && <Text className="text-center font-bold text-md">Please scan the barcode of the product.</Text>}
-        {scanned && <Text className="text-center font-extrabold text-lg text-md text-main-red">PRODUCT SCANNED:</Text>}
-        {scanned && <Text className="text-center font-extrabold text-xl text-main-red" numberOfLines={1}>{product.title}</Text>}
-        <Pressable 
-          className="bg-main-green rounded-lg p-3 w-full mt-8 active:scale-95 transition-all" 
-          onPress={() => setScanned(false)}
-        >
-          <Text className='text-white text-lg text-center'>Scan {scanned ? 'Again' : 'Product'}</Text>
-        </Pressable>
-        {scanned && product.title !== "Not Found" && 
+        {!scanned && !loading && <Text className="text-center font-bold text-md">Please scan the barcode of the product.</Text>}
+        {loading && <Text className="text-center font-bold text-xl">Loading...</Text>}
+        {scanned && !loading && <Text className="text-center font-extrabold text-lg text-md text-main-red">PRODUCT SCANNED:</Text>}
+        {scanned && !loading && <Text className="text-center font-extrabold text-xl text-main-red" numberOfLines={1}>{product.title}</Text>}
+        {
+          loading ? '' :
+          <Pressable 
+            className="bg-main-green rounded-lg p-3 w-full mt-8 active:scale-95 transition-all" 
+            onPress={() => setScanned(false)}
+          >
+            <Text className='text-white text-lg text-center'>Scan {scanned && !loading ? 'Again' : 'Product'}</Text>
+          </Pressable>
+        }
+        {scanned && !loading && product.title !== "Not Found" && 
           <Pressable 
             className="bg-main-green rounded-lg p-3 w-full mt-6" 
             onPress={() => navigation.navigate("Item", {product: product})}

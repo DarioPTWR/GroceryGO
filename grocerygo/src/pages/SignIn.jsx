@@ -14,9 +14,6 @@ import baseURL from "../baseURL";
 import { useCardAnimation } from 'react-navigation-stack';
 
 const SignIn = () => {
-    const onPressSignIn = () => {
-        console.log("Signed In")
-    };
     const [emailUsername, setEmailUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errMessage, setErrMessage] = useState("");

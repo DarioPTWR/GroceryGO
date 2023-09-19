@@ -45,9 +45,9 @@ export default function Scanner({ navigation }) {
 
   if (hasPermission === null) {
     return (
-      <SafeAreaView className="flex-1 h-screen px-14 pt-16 bg-main-background">
+      <SafeAreaView className="flex-1 h-screen px-14 bg-main-background">
         <BackButton/>
-        <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
+        <Text className="text-5xl font-extrabold self-start mt-16">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
         <View 
           className="w-full aspect-square my-6 bg-zinc-700 flex justify-center p-6"
@@ -66,8 +66,8 @@ export default function Scanner({ navigation }) {
   
   if (hasPermission === false) {
     return (
-      <SafeAreaView className="flex-1 h-screen px-14 pt-16 bg-main-background">
-        <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
+      <SafeAreaView className="flex-1 h-screen px-14 bg-main-background">
+        <Text className="text-5xl font-extrabold self-start mt-16">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
         <View 
           className="w-full aspect-square my-6 bg-zinc-700 flex justify-center p-6"
@@ -85,9 +85,9 @@ export default function Scanner({ navigation }) {
   }
 
   return (
-    <SafeAreaView className="flex-1 h-screen pt-16 bg-main-background">
+    <SafeAreaView className="flex-1 h-screen bg-main-background">
       <ScrollView className='px-14'>
-        <Text className="text-5xl font-extrabold self-start">Scan A Product</Text>
+        <Text className="text-5xl font-extrabold self-start mt-16">Scan A Product</Text>
         <Text className="text-xs font-bold self-start">Use the scanner below to scan the item.</Text>
         <BarCodeScanner 
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} 

@@ -9,10 +9,10 @@ import BackButton from "../components/BackButton";
 const preferences = [
   "Gluten-Free",
   "Lactose Intolerant",
-  "Healthier Choice",
-  "Vegetarian Based",
-  "Halal Certified",
-  "Spice Intolerant",
+  "Vegetarian",
+  "No Artificial Flavouring",
+  "No Preservatives",
+  "Soy Free",
   "Nuts Free",
 ];
 
@@ -64,7 +64,7 @@ const Preference = ({ navigation }) => {
         console.log("Submitted Preferences:", finalPreferences);
         return finalPreferences;
       });
-
+      navigation.navigate("Scanner");
   };
 
   const handleCustomPreferenceChange = (text) => {

@@ -70,7 +70,7 @@ const Profile = () => {
               Make a friend referral to hop onto our app and earn points for
               every successful referral
             </Text>
-            <Pressable className="flex flex-row mt-4">
+            <Pressable className="flex flex-row mt-4 mb-16">
               <View className="bg-main-green py-2 w-3/5 max-w-lg rounded-md flex flex-row p-2 flex-grow items-center">
                 <FontAwesomeIcon icon={faPlusCircle} size={22} color="white" />
                 <Text className="text-white text-lg ml-3 ">Invite Friends</Text>

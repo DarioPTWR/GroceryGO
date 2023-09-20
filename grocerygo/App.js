@@ -2,8 +2,10 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useFonts } from "expo-font";
+import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // Import pages
 import Login from "./src/pages/Login";
@@ -41,12 +43,51 @@ function HomeTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: 10,
+          backgroundColor: '#AC3333',
+          height: 60
+        },
       }}
       initialRouteName="Scanner"
     >
-      <Tab.Screen name="Scanner" component={ScannerStack} />
-      <Tab.Screen name="Preference" component={Preference} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen
+        name="Scanner"
+        component={ScannerStack}
+        options={{
+          tabBarLabel: "", // Hide the label
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="qr-code-scanner" size={34} color="white" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Preference"
+        component={Preference}
+        options={{
+          tabBarLabel: "", // Hide the label
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="form" size={34} color="white" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: "", // Hide the label
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="face-man-profile"
+              size={34}
+              color="white"
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -56,7 +97,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Login"
           screenOptions={{
             headerShown: false,
           }}

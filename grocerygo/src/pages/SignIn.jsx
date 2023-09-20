@@ -15,6 +15,7 @@ import BackButton from "../components/BackButton";
 import FormInput from "../components/FormInput";
 import baseURL from "../baseURL";
 import { useCardAnimation } from "react-navigation-stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignIn = () => {
   const [emailUsername, setEmailUsername] = useState("");
@@ -29,9 +30,14 @@ const SignIn = () => {
         emailUsername: emailUsername,
         password: password,
       })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
-        navigation.navigate("Home", {screen: 'Scanner'});
+        try {
+          await AsyncStorage.setItem('username', emailUsername);
+          navigation.navigate("Home", {screen: 'Scanner'});
+        } catch (e) {
+          console.log(e);
+        }
       })
       .catch((err) => {
         setErrMessage(err.response.data);

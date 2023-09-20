@@ -34,78 +34,78 @@ const ProductCard = ({ product }) => {
   );
 };
 
-const products = [
-  {
-    imageUrl: "https://spoonacular.com/productImages/10054770-312x231.jpg",
-    title: "Ritz crackers toasted 1x0.75 oz",
-  },
-  {
-    imageUrl: "https://spoonacular.com/productImages/12268476-312x231.jpg",
-    title: "Buttery Tectured Crackers",
-  },
-  {
-    imageUrl: "https://spoonacular.com/productImages/11746962-312x231.jpg",
-    title: "Sweet butter crackers",
-  },
-  {
-    imageUrl: "https://spoonacular.com/productImages/5070738-312x231.jpg",
-    title: "Kelloggs Keebler Light Buttery Crackers, 16 oz",
-  },
-];
+// const products = [
+//   {
+//     imageUrl: "https://spoonacular.com/productImages/10054770-312x231.jpg",
+//     title: "Ritz crackers toasted 1x0.75 oz",
+//   },
+//   {
+//     imageUrl: "https://spoonacular.com/productImages/12268476-312x231.jpg",
+//     title: "Buttery Tectured Crackers",
+//   },
+//   {
+//     imageUrl: "https://spoonacular.com/productImages/11746962-312x231.jpg",
+//     title: "Sweet butter crackers",
+//   },
+//   {
+//     imageUrl: "https://spoonacular.com/productImages/5070738-312x231.jpg",
+//     title: "Kelloggs Keebler Light Buttery Crackers, 16 oz",
+//   },
+// ];
 
 const Comparison = ({ navigation }) => {
   const route = useRoute();
   const product = route.params?.product;
 
-  // const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   //classify the product
-  //   axios
-  //     .post(
-  //       "https://api.spoonacular.com/food/products/classify",
-  //       {
-  //         title: product.title,
-  //         upc: product.upc,
-  //       },
-  //       {
-  //         params: { apiKey: "ef7386df4ade4892ac164598e7f45732" },
-  //         headers: { "Content-Type": "application/json" },
-  //       }
-  //     )
-  //     .then((response) => {
-  //       //get the category of the product
-  //       // console.log(response.data.category);
-  //       // console.log(response.data);
-  //       query = response.data.category;
-  //       axios
-  //         .get(
-  //           `https://api.spoonacular.com/food/products/search?query=${query}&addProductInformation=True&number=4&apiKey=ef7386df4ade4892ac164598e7f45732`
-  //         )
-  //         .then((response) => {
-  //           const newProducts = [];
-  //           for (let i = 0; i < 4; i++) {
-  //             const productData = response.data.products[i];
-  //             // filter out the products if one of the user badges is not included in the product badges, dont add to the list
-  //             if (productData.badges.some((r) => user_badges.indexOf(r) >= 0)) {
-  //               newProducts.push({
-  //                 title: productData.title,
-  //                 imageUrl: productData.image,
-  //               });
-  //             }
-  //           }
-  //           console.log(newProducts);
-  //           setProducts(newProducts);
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   // use the category to get the similar products
-  // }, []);
+  useEffect(() => {
+    //classify the product
+    axios
+      .post(
+        "https://api.spoonacular.com/food/products/classify",
+        {
+          title: product.title,
+          upc: product.upc,
+        },
+        {
+          params: { apiKey: "ef7386df4ade4892ac164598e7f45732" },
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((response) => {
+        //get the category of the product
+        // console.log(response.data.category);
+        // console.log(response.data);
+        query = response.data.category;
+        axios
+          .get(
+            `https://api.spoonacular.com/food/products/search?query=${query}&addProductInformation=True&number=4&apiKey=ef7386df4ade4892ac164598e7f45732`
+          )
+          .then((response) => {
+            const newProducts = [];
+            for (let i = 0; i < 4; i++) {
+              const productData = response.data.products[i];
+              // filter out the products if one of the user badges is not included in the product badges, dont add to the list
+              if (productData.badges.some((r) => user_badges.indexOf(r) >= 0)) {
+                newProducts.push({
+                  title: productData.title,
+                  imageUrl: productData.image,
+                });
+              }
+            }
+            console.log(newProducts);
+            setProducts(newProducts);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // use the category to get the similar products
+  }, []);
 
   return (
     <SafeAreaView className="h-screen bg-[#fff4ec]">

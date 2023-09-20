@@ -9,6 +9,7 @@ import FormInput from "../components/FormInput";
 import AddImage from "../components/AddImage";
 import Button from "../components/Button";
 import baseURL from "../baseURL";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CreateAccount = ({ navigation }) => {
   const [username, setUsername] = React.useState('');
@@ -50,9 +51,14 @@ const CreateAccount = ({ navigation }) => {
         email: email,
         password: password,
       })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
-        navigation.navigate("Home", {screen: 'Preferences'});
+        try {
+          await AsyncStorage.setItem('username', username);
+          navigation.navigate("Home", {screen: 'Preferences'});
+        } catch (e) {
+          console.log(e)
+        }
       })
       .catch((err) => {
         setErrMessage(err.response.data);

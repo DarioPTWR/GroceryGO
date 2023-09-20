@@ -1,8 +1,20 @@
 import React from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import Button from "../components/Button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
+  async function getUsername(){
+    try {
+      const username = await AsyncStorage.getItem('username');
+      console.log(username)
+      return jsonValue != null ? username : null;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  if(getUsername()) navigation.navigate('Home', {screen: 'Scanner'})
+
   return (
     <View className="h-screen justify-center bg-main-background flex-1">
       <Image

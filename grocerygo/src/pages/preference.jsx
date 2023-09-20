@@ -4,26 +4,25 @@ import React, { useState, useEffect} from "react";
 import { View, Text, ScrollView, TouchableOpacity, TextInput, KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
-
 // Import components
 import Button from "../components/Button.jsx";
 import BackButton from "../components/BackButton.jsx";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const preferences = [
-        "Egg Free",
-        "Wheat Free",
-        "Grain Free",
-        "Peanut Free",
-        "Primal",
-        "Vegetarian",
-        "Nut Free",
-        "Vegan",
-        "Pescetarian",
-        "Dairy Free",
-        "Paleo",
-        "Gluten Free"
-    ]
+  "Egg Free",
+  "Wheat Free",
+  "Grain Free",
+  "Peanut Free",
+  "Primal",
+  "Vegetarian",
+  "Nut Free",
+  "Vegan",
+  "Pescetarian",
+  "Dairy Free",
+  "Paleo",
+  "Gluten Free"
+]
 
 // add a button for each preference in the preferences array 
 const PreferenceButton = ({ preference, isSelected, onPress }) => {
@@ -43,13 +42,23 @@ const PreferenceButton = ({ preference, isSelected, onPress }) => {
   );
 };
 
-
 const Preference = ({ navigation }) => {
   // declare vars and set their state
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   const [customPreference, setCustomPreference] = useState(""); // State for custom preference input
-  useEffect(() => {
-    const userPreferencesRef = doc(db, "Preferences", "Joe"); // Replace "Joe" with the actual user ID
+  const [username, setUsername] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [sent, setSent] = React.useState(false);
+
+  React.useEffect(async() => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('username');
+      console.log(jsonValue)
+      jsonValue != null ? setUsername(jsonValue) : null;
+    } catch (e) {
+      console.log(e);
+    }
+    const userPreferencesRef = doc(db, "Preferences", username); // Replace "Joe" with the actual user ID
     const unsubscribe = onSnapshot(userPreferencesRef, (docSnapshot) => {
       if (docSnapshot.exists()) {
         const userData = docSnapshot.data();
@@ -63,7 +72,6 @@ const Preference = ({ navigation }) => {
     return unsubscribe; // Cleanup function to unsubscribe from the snapshot listener
   }, []);
 
-
   const togglePreference = (preference) => {
     if (selectedPreferences.includes(preference)) {
       setSelectedPreferences(
@@ -74,12 +82,12 @@ const Preference = ({ navigation }) => {
     }
   };
 
-
   // Function to handle the "Submit" button click
   const handleSubmit =  async () => {
+    setLoading(true)
     // Get the user preferences document from Firestore can replace joe with user id 
     // this is the path to the document
-    const userPreferencesRef = doc(db, "Preferences", "Joe"); 
+    const userPreferencesRef = doc(db, "Preferences", username); 
     // Get the user preferences document
     const userPreferencesDoc = await getDoc(userPreferencesRef);
     // Get the data from the user preferences document or an empty object if it does not exist
@@ -101,6 +109,8 @@ const Preference = ({ navigation }) => {
       await setDoc(userPreferencesRef, updatedUserPreferences);
       console.log(userPreferencesData);
     }
+    setLoading(false)
+    setSent(true)
     setSelectedPreferences((prevSelectedPreferences) => {
       // Store the current selected preferences as submitted preferences
       let finalPreferences = [...prevSelectedPreferences];
@@ -112,7 +122,6 @@ const Preference = ({ navigation }) => {
       }
 
       return finalPreferences;
-      navigation.navigate("Scanner");
     });
   };
 
@@ -165,9 +174,22 @@ const Preference = ({ navigation }) => {
               buttonText={"Submit Preferences"}
             >
               <View className="bg-[#355D4E] py-2 w-3/5 max-w-lg rounded-md">
-                <Text className="text-white text-lg text-center">
-                  Submit Preferences
-                </Text>
+                {
+                  !sent && !loading &&
+                  <Text className="text-white text-lg text-center">
+                    Submit Preferences
+                  </Text>
+                  ||
+                  sent && !loading &&
+                  <Text className="text-white text-lg text-center">
+                    Saved!
+                  </Text>
+                  ||
+                  loading &&
+                  <Text className="text-white text-lg text-center">
+                    Loading...
+                  </Text>
+                }
               </View>
             </TouchableOpacity>
           </View>

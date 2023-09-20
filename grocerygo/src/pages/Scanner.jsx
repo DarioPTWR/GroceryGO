@@ -15,7 +15,7 @@ import BackButton from "../components/BackButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import baseURL from "../baseURL";
 
-const producttt = {"aisle": "Savory Snacks", "badges": ["egg_free", "msg_free", "peanut_free", "no_artificial_colors", "no_artificial_flavors", "vegetarian", "nut_free", "no_artificial_ingredients", "vegan", "dairy_free", "soy_free"], "brand": null, "breadcrumbs": ["butter crackers", "crackers", "snack", "menu item type"], "description": null, "generatedText": "Ritz crackers original: This product is an awesome fit if you like to buy products that are vegetarian and vegan. We recommend choosing products with short ingredient lists, as these tend to be less processed. This product has 16 ingredients. According to our research, this product contains no ingredients that you should avoid.", "id": 9290956, "image": "https://spoonacular.com/productImages/9290956-312x231.jpg", "imageType": "jpg", "images": ["https://spoonacular.com/productImages/9290956-90x90.jpg", "https://spoonacular.com/productImages/9290956-312x231.jpg", "https://spoonacular.com/productImages/9290956-636x393.jpg"], "importantBadges": [], "ingredientCount": 16, "ingredientList": "span class=\"allergen\">wheat flour</span>, palm oil, sugar, raising agents (ammonium bicarbonate, monocalcium orthophosphate, sodium bicarbonate, potassium bicarbonate), glucose-fructose syrup, salt, <span class=\"allergen\">barley malt flour</span>, emulsifier (sunflower lecithin), may contain <span class=\"allergen\">egg</span>, <span class=\"allergen\">milk</span>, <span class=\"allergen\">sesame</span", "ingredients": [{"description": null, "name": "wheat flour", "safety_level": null}, {"description": null, "name": "sesame", "safety_level": null}, {"description": null, "name": "egg", "safety_level": null}, {"description": null, "name": "sunflower lecithin", "safety_level": null}, {"description": null, "name": "raising agents", "safety_level": null}, {"description": null, "name": "milk", "safety_level": null}, {"description": null, "name": "potassium bicarbonate", "safety_level": null}, {"description": null, "name": "barley malt flour", "safety_level": null}, {"description": null, "name": "ammonium bicarbonate", "safety_level": null}, {"description": null, "name": "monocalcium orthophosphate", "safety_level": null}, {"description": null, "name": "palm oil", "safety_level": null}, {"description": null, "name": "sugar", "safety_level": null}, {"description": null, "name": "glucose-fructose syrup", "safety_level": "controversial"}, {"description": null, "name": "sodium bicarbonate", "safety_level": null}, {"description": null, "name": "salt", "safety_level": null}], "likes": 0, "nutrition": {"caloricBreakdown": {"percentCarbs": 21.2, "percentFat": 68.59, "percentProtein": 10.21}, "calories": null, "carbs": "16g", "fat": "23g", "nutrients": [[Object], [Object], [Object], [Object], [Object], [Object], [Object], [Object]], "protein": "7.699999809265137g"}, "price": 0, "servings": {"number": 8, "size": 25, "unit": "g"}, "spoonacularScore": 27.5, "title": "Ritz crackers original", "upc": "7622210157324"}
+// const producttt = {"aisle": "Savory Snacks", "badges": ["egg_free", "msg_free", "peanut_free", "no_artificial_colors", "no_artificial_flavors", "vegetarian", "nut_free", "no_artificial_ingredients", "vegan", "dairy_free", "soy_free"], "brand": null, "breadcrumbs": ["butter crackers", "crackers", "snack", "menu item type"], "description": null, "generatedText": "Ritz crackers original: This product is an awesome fit if you like to buy products that are vegetarian and vegan. We recommend choosing products with short ingredient lists, as these tend to be less processed. This product has 16 ingredients. According to our research, this product contains no ingredients that you should avoid.", "id": 9290956, "image": "https://spoonacular.com/productImages/9290956-312x231.jpg", "imageType": "jpg", "images": ["https://spoonacular.com/productImages/9290956-90x90.jpg", "https://spoonacular.com/productImages/9290956-312x231.jpg", "https://spoonacular.com/productImages/9290956-636x393.jpg"], "importantBadges": [], "ingredientCount": 16, "ingredientList": "span class=\"allergen\">wheat flour</span>, palm oil, sugar, raising agents (ammonium bicarbonate, monocalcium orthophosphate, sodium bicarbonate, potassium bicarbonate), glucose-fructose syrup, salt, <span class=\"allergen\">barley malt flour</span>, emulsifier (sunflower lecithin), may contain <span class=\"allergen\">egg</span>, <span class=\"allergen\">milk</span>, <span class=\"allergen\">sesame</span", "ingredients": [{"description": null, "name": "wheat flour", "safety_level": null}, {"description": null, "name": "sesame", "safety_level": null}, {"description": null, "name": "egg", "safety_level": null}, {"description": null, "name": "sunflower lecithin", "safety_level": null}, {"description": null, "name": "raising agents", "safety_level": null}, {"description": null, "name": "milk", "safety_level": null}, {"description": null, "name": "potassium bicarbonate", "safety_level": null}, {"description": null, "name": "barley malt flour", "safety_level": null}, {"description": null, "name": "ammonium bicarbonate", "safety_level": null}, {"description": null, "name": "monocalcium orthophosphate", "safety_level": null}, {"description": null, "name": "palm oil", "safety_level": null}, {"description": null, "name": "sugar", "safety_level": null}, {"description": null, "name": "glucose-fructose syrup", "safety_level": "controversial"}, {"description": null, "name": "sodium bicarbonate", "safety_level": null}, {"description": null, "name": "salt", "safety_level": null}], "likes": 0, "nutrition": {"caloricBreakdown": {"percentCarbs": 21.2, "percentFat": 68.59, "percentProtein": 10.21}, "calories": null, "carbs": "16g", "fat": "23g", "nutrients": [[Object], [Object], [Object], [Object], [Object], [Object], [Object], [Object]], "protein": "7.699999809265137g"}, "price": 0, "servings": {"number": 8, "size": 25, "unit": "g"}, "spoonacularScore": 27.5, "title": "Ritz crackers original", "upc": "7622210157324"}
 
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -35,26 +35,26 @@ export default function Scanner({ navigation }) {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setLoading(true);
-    setLoading(false);
-    setProduct({...producttt, upc: data});
-    // axios
-    //   .get(
-    //     `https://api.spoonacular.com/food/products/upc/${data}?apiKey=ef7386df4ade4892ac164598e7f45732`
-    //   )
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     setLoading(false);
-    //     if (res.data.status === "failure") {
-    //       setProduct({ title: "Not Found" });
-    //     } else {
-    //       setProduct(res.data);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     setProduct({ title: "Not Found" });
-    //     alert(err);
-    //   });
+    // setLoading(false);
+    // setProduct({...producttt, upc: data});
+    axios
+      .get(
+        `https://api.spoonacular.com/food/products/upc/${data}?apiKey=ef7386df4ade4892ac164598e7f45732`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+        if (res.data.status === "failure") {
+          setProduct({ title: "Not Found" });
+        } else {
+          setProduct(res.data);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        setProduct({ title: "Not Found" });
+        alert(err);
+      });
   };
 
   if (hasPermission === null) {

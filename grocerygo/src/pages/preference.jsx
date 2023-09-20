@@ -47,7 +47,6 @@ const PreferenceButton = ({ preference, isSelected, onPress }) => {
 const Preference = ({ navigation }) => {
   // declare vars and set their state
   const [selectedPreferences, setSelectedPreferences] = useState([]);
-  // const [submittedPreferences, setSubmittedPreferences] = useState([]);
   const [customPreference, setCustomPreference] = useState(""); // State for custom preference input
   useEffect(() => {
     const userPreferencesRef = doc(db, "Preferences", "Joe"); // Replace "Joe" with the actual user ID

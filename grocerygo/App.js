@@ -1,65 +1,73 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer, StackActions } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useFonts } from 'expo-font';
+import { useFonts } from "expo-font";
 
 // Import pages
 import Login from "./src/pages/Login";
 import SignIn from "./src/pages/SignIn";
 import CreateAccount from "./src/pages/CreateAccount";
-import Preference from './src/pages/Preference'
+import Preference from "./src/pages/Preference";
 import Scanner from "./src/pages/Scanner";
 import Test from "./src/pages/Test";
-import Comparison from './src/pages/Comparison';
+import Comparison from "./src/pages/Comparison";
 import Profile from "./src/pages/Profile";
 import Item from "./src/pages/Item";
 
-
-const Tab = createBottomTabNavigator();
 // Create the Bottom Tab
-<Tab.Navigator className = 'bg-white'
-  screenOptions={({ route }) => ({
-    tabBarIcon: ({ color, size }) => {
-      let iconName;
-      if (route.name === "Preference") {
-        iconName = "Preference";
-      } 
-      return (
-        <MaterialCommunityIcons
-          name={iconName}
-          size={30}
-          color={color}
-          style={{ height: 30 }}
-        />
-      );
-    }
-  })}
-></Tab.Navigator>
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
-export default function App(){
+function ScannerStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Scanner"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Scanner" component={Scanner} />
+      <Stack.Screen name="Item" component={Item} />
+      <Stack.Screen name="Comparison" component={Comparison} />
+      <Stack.Screen name="Home" component={HomeTabs} />
+    </Stack.Navigator>
+  );
+}
+
+function HomeTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="Scanner"
+    >
+      <Tab.Screen name="Scanner" component={ScannerStack} />
+      <Tab.Screen name="Preference" component={Preference} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Tab.Navigator 
+        <Stack.Navigator
+          initialRouteName="Home"
           screenOptions={{
-            headerShown: false
+            headerShown: false,
           }}
-          initialRouteName='Login'
         >
-          <Tab.Screen name="Scanner" component={Scanner} />
-          {/* <Tab.Screen name="Test" component={Test} /> */}
-          <Tab.Screen name="Comparison" component={Comparison} />
-          <Tab.Screen name="Login" component={Login} />
-          <Tab.Screen name="SignIn" component={SignIn} />
-          <Tab.Screen name="CreateAccount" component={CreateAccount} />
-          <Tab.Screen name="Preference" component={Preference} />
-          <Tab.Screen name ="Profile" component={Profile} />
-          <Tab.Screen name="Item" component={Item} />
-        </Tab.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="CreateAccount" component={CreateAccount} />
+          <Stack.Screen name="Home" component={HomeTabs} />
+          <Stack.Screen name="ScannerStack" component={ScannerStack} />
+        </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
-  )
+  );
 }

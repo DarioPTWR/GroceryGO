@@ -52,7 +52,7 @@ const CreateAccount = ({ navigation }) => {
       })
       .then((res) => {
         console.log(res.data);
-        navigation.navigate("Preference");
+        navigation.navigate("Home", {screen: 'Preferences'});
       })
       .catch((err) => {
         setErrMessage(err.response.data);
@@ -60,7 +60,7 @@ const CreateAccount = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView className="h-screen bg-[#fff4ec]">
+    <SafeAreaView className="h-screen bg-[#fff4ec] flex-1">
       <KeyboardAvoidingView behavior="position">
         <BackButton navigation={navigation} />
         <Text className="font-bold text-6xl mt-4 mx-9">Create Account</Text>

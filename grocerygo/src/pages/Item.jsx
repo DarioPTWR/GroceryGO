@@ -82,7 +82,7 @@ const Item = ({ navigation }) => {
           return "No Preservatives"
       }
     })
-    filteredPreferences = preferencesMapped.filter((x)=> x !== undefined)
+    const filteredPreferences = preferencesMapped.filter((x)=> x !== undefined)
     console.log(product.badges, filteredPreferences)
     console.log(preferences)
     let unfulfilledPreferences = UserPreferences.filter((o) => !filteredPreferences.includes(o));
@@ -175,7 +175,7 @@ const Item = ({ navigation }) => {
               </React.Fragment>
             ))}
           </Text>
-          <ItemButton buttonText="Explore Similar Products" />
+          <ItemButton buttonText="Explore Similar Products" onPress={() => navigation.navigate('Comparison')}/>
           <ItemButton buttonText="Add to Cart" />
         </View>
       </ScrollView>

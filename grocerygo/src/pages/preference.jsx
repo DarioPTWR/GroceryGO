@@ -7,8 +7,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 
 // Import components
-import Button from "../components/Button";
-import BackButton from "../components/BackButton";
+import Button from "../components/Button.jsx";
+import BackButton from "../components/BackButton.jsx";
 
 const preferences = [
         "Egg Free",

@@ -3,7 +3,7 @@ import { View, Text, Pressable } from "react-native";
 
 const ItemButton = ({ onPress, buttonText }) => {
   return (
-    <Pressable onPress={onPress} className="items-center">
+    <Pressable onPress={onPress} className="items-center active:scale-95 transition">
       <View
         style={{ width: 310 }}
         className="bg-[#355D4E] py-2 mt-2 rounded-md"

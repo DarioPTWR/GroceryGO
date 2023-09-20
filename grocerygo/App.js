@@ -23,12 +23,12 @@ const Stack = createStackNavigator();
 function ScannerStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Scanner"
+      initialRouteName="MainScanner"
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Scanner" component={Scanner} />
+      <Stack.Screen name="MainScanner" component={Scanner} />
       <Stack.Screen name="Item" component={Item} />
       <Stack.Screen name="Comparison" component={Comparison} />
       <Stack.Screen name="Home" component={HomeTabs} />

@@ -83,10 +83,7 @@ const Item = ({ navigation }) => {
       }
     })
     const filteredPreferences = preferencesMapped.filter((x)=> x !== undefined)
-    console.log(product.badges, filteredPreferences)
-    console.log(preferences)
     let unfulfilledPreferences = UserPreferences.filter((o) => !filteredPreferences.includes(o));
-    console.log(unfulfilledPreferences)
     let fulfilledPreferences = UserPreferences.filter((o)=> filteredPreferences.includes(o))
     return [unfulfilledPreferences, fulfilledPreferences]
   }
@@ -175,7 +172,7 @@ const Item = ({ navigation }) => {
               </React.Fragment>
             ))}
           </Text>
-          <ItemButton buttonText="Explore Similar Products" onPress={() => navigation.navigate('Comparison')}/>
+          <ItemButton buttonText="Explore Similar Products" onPress={() => navigation.navigate('Comparison', {product: product})}/>
           <ItemButton buttonText="Add to Cart" />
         </View>
       </ScrollView>

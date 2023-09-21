@@ -44,11 +44,11 @@ const Item = ({ navigation }) => {
   const [username, setUsername] = React.useState('')
   const [userPreferences, setUserPreferences] = React.useState([''])
 
+  // Get user's preferences
   React.useEffect(async() => {
     AsyncStorage.getItem('username')
       .then(response => {
         setUsername(response)
-        console.log(response)
         const userPreferencesRef = doc(db, "Preferences", response); // Replace "Joe" with the actual user ID
         const unsubscribe = onSnapshot(userPreferencesRef, (docSnapshot) => {
           if (docSnapshot.exists()) {
@@ -59,8 +59,6 @@ const Item = ({ navigation }) => {
             setUserPreferences(updatedSelectedPreferences);
           }
         });
-
-        return unsubscribe;
       })
       .catch(err => console.log(err))
   }, []);
@@ -77,30 +75,33 @@ const Item = ({ navigation }) => {
   }
 
   const checkUnfulfilled = (preferences) => {
+    console.log(preferences)
     const preferencesMapped = preferences.map(preference => {
       switch(preference){
-        case 'gluten_free':
-          return 'Gluten-Free'
-        case 'dairy_free':
-          return 'Lactose Intolerant'
+        case 'egg_free':
+          return 'Egg Free'
+        case 'wheat_free':
+          return 'Wheat Free'
+        case 'grain_free':
+          return 'Grain Free'
+        case 'peanut_free':
+          return 'Peanut Free'
+        case 'primal':
+          return 'Primal'
         case 'vegetarian':
           return 'Vegetarian'
-        case 'peanut_free':
-          return 'Peanut - Free'
-        case 'grain_free':
-          return 'Grain - Free'
-        case 'wheat_free':
-          return 'Wheat - Free'
         case "nut_free":
-          return "Nuts Free"
-        case "halal":
-          return "Halal Certified"
-        case "soy_free":
-          return "Soy Free"
-        case "no_artificial_flavors":
-          return "No Artificial Flavouring"
-        case "no_preservatives":
-          return "No Preservatives"
+          return "Nut Free"
+        case "vegan":
+          return "Vegan"
+        case "pescetarian":
+          return "Pescetarian"
+        case 'dairy_free':
+          return 'Dairy Free'
+        case "paleo":
+          return "Paleo"
+        case 'gluten_free':
+          return 'Gluten Free'
       }
     })
     const filteredPreferences = preferencesMapped.filter((x)=> x !== undefined)
@@ -111,6 +112,7 @@ const Item = ({ navigation }) => {
   }
 
   let [unfulfilledPreferences, fulfilledPreferences] = checkUnfulfilled(product.badges)
+
   return (
     <SafeAreaView className="bg-main-background">
       <ScrollView className="h-screen bg-main-background">
@@ -173,7 +175,7 @@ const Item = ({ navigation }) => {
             style={{ fontSize: 16 }}
             className="font-bold text-[#D44C3D] mt-4"
           >
-            PREFERENCE MATCH : {unfulfilledPreferences ? 'NOT' : ''} SUITABLE
+            PREFERENCE MATCH : {unfulfilledPreferences ? '' : ''} SUITABLE
           </Text>
           <Text style={{ fontSize: 16 }} className="mt-4 mb-6">
             {unfulfilledPreferences.map((preference, index) => (
@@ -210,7 +212,6 @@ const Item = ({ navigation }) => {
             ))}
           </Text>
           <ItemButton buttonText="Explore Similar Products" onPress={() => navigation.navigate('Comparison', {product: product})}/>
-          <ItemButton buttonText="Add to Cart" />
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -6,7 +6,8 @@ import { useFonts } from "expo-font";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import {LogBox} from 'react-native';
+LogBox.ignoreAllLogs();
 // Import pages
 import Login from "./src/pages/Login";
 import SignIn from "./src/pages/SignIn";
@@ -40,55 +41,57 @@ function ScannerStack() {
 
 function HomeTabs() {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingTop: 10,
-          backgroundColor: '#AC3333',
-          height: 60
-        },
-      }}
-      initialRouteName="Scanner"
-    >
-      <Tab.Screen
-        name="Scanner"
-        component={ScannerStack}
-        options={{
-          tabBarLabel: "", // Hide the label
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="qr-code-scanner" size={34} color="white" />
-          ),
+    <SafeAreaProvider>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingTop: 10,
+            backgroundColor: '#AC3333',
+            height: 60
+          },
         }}
-      />
-      <Tab.Screen
-        name="Preference"
-        component={Preference}
-        options={{
-          tabBarLabel: "", // Hide the label
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="form" size={34} color="white" />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarLabel: "", // Hide the label
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="face-man-profile"
-              size={34}
-              color="white"
-            />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+        initialRouteName="Scanner"
+      >
+        <Tab.Screen
+          name="Scanner"
+          component={ScannerStack}
+          options={{
+            tabBarLabel: "", // Hide the label
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="qr-code-scanner" size={34} color="white" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Preference"
+          component={Preference}
+          options={{
+            tabBarLabel: "", // Hide the label
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="form" size={34} color="white" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: "", // Hide the label
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="face-man-profile"
+                size={34}
+                color="white"
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </SafeAreaProvider>
   );
 }
 

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import BackButton from "../components/BackButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import baseURL from "../baseURL";
@@ -96,6 +96,7 @@ export default function Scanner({ navigation }) {
   const [scanned, setScanned] = useState(false);
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({});
+  const isFocused = useIsFocused();
 
   React.useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -189,10 +190,12 @@ export default function Scanner({ navigation }) {
         <Text className="text-xs font-bold self-start">
           Use the scanner below to scan the item.
         </Text>
+        {isFocused ? (
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           className="w-full aspect-square my-6"
         />
+        ) : null }
         {!scanned && !loading && (
           <Text className="text-center font-bold text-md">
             Please scan the barcode of the product.

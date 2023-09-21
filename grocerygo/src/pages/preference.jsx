@@ -51,25 +51,24 @@ const Preference = ({ navigation }) => {
   const [sent, setSent] = React.useState(false);
 
   React.useEffect(async() => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('username');
-      console.log(jsonValue)
-      jsonValue != null ? setUsername(jsonValue) : null;
-    } catch (e) {
-      console.log(e);
-    }
-    const userPreferencesRef = doc(db, "Preferences", username); // Replace "Joe" with the actual user ID
-    const unsubscribe = onSnapshot(userPreferencesRef, (docSnapshot) => {
-      if (docSnapshot.exists()) {
-        const userData = docSnapshot.data();
-        const updatedSelectedPreferences = preferences.filter(
-          (preference) => userData[preference]
-        );
-        setSelectedPreferences(updatedSelectedPreferences);
-      }
-    });
+    AsyncStorage.getItem('username')
+      .then(response => {
+        setUsername(response)
+        console.log(response)
+        const userPreferencesRef = doc(db, "Preferences", response); // Replace "Joe" with the actual user ID
+        const unsubscribe = onSnapshot(userPreferencesRef, (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            const updatedSelectedPreferences = preferences.filter(
+              (preference) => userData[preference]
+            );
+            setSelectedPreferences(updatedSelectedPreferences);
+          }
+        });
 
-    return unsubscribe; // Cleanup function to unsubscribe from the snapshot listener
+        return unsubscribe;
+      })
+      .catch(err => console.log(err))
   }, []);
 
   const togglePreference = (preference) => {

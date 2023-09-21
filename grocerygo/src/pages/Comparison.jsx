@@ -34,24 +34,24 @@ const ProductCard = ({ product }) => {
   );
 };
 
-// const products = [
-//   {
-//     imageUrl: "https://spoonacular.com/productImages/10054770-312x231.jpg",
-//     title: "Ritz crackers toasted 1x0.75 oz",
-//   },
-//   {
-//     imageUrl: "https://spoonacular.com/productImages/12268476-312x231.jpg",
-//     title: "Buttery Tectured Crackers",
-//   },
-//   {
-//     imageUrl: "https://spoonacular.com/productImages/11746962-312x231.jpg",
-//     title: "Sweet butter crackers",
-//   },
-//   {
-//     imageUrl: "https://spoonacular.com/productImages/5070738-312x231.jpg",
-//     title: "Kelloggs Keebler Light Buttery Crackers, 16 oz",
-//   },
-// ];
+  // const products = [
+  //   {
+  //     imageUrl: "https://spoonacular.com/productImages/10054770-312x231.jpg",
+  //     title: "Ritz crackers toasted 1x0.75 oz",
+  //   },
+  //   {
+  //     imageUrl: "https://spoonacular.com/productImages/12268476-312x231.jpg",
+  //     title: "Buttery Tectured Crackers",
+  //   },
+  //   {
+  //     imageUrl: "https://spoonacular.com/productImages/11746962-312x231.jpg",
+  //     title: "Sweet butter crackers",
+  //   },
+  //   {
+  //     imageUrl: "https://spoonacular.com/productImages/5070738-312x231.jpg",
+  //     title: "Kelloggs Keebler Light Buttery Crackers, 16 oz",
+  //   },
+  // ];
 
 const Comparison = ({ navigation }) => {
   const route = useRoute();

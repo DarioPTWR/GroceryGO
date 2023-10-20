@@ -10,12 +10,12 @@ const First = () => {
     const [value, setValue] = useState(null);
     const [heightItems, setHeightItems] = useState([]);
     const heights = [];
-    for (let height = 120; height <= 130; height++) {
-        heights.push({
-            label: height,
-            value: height
-        })
-    }
+    // for (let height = 130; height <= 130; height++) {
+    //     heights.push({
+    //         label: height,
+    //         value: height
+    //     })
+    // }
     console.log(heights)
     setHeightItems(heights);
     return (

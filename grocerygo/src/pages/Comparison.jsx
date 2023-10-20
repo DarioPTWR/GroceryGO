@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 import { useRoute } from "@react-navigation/native";
-import BackButton from "../components/BackButton";
+import BackButton from "../components/Buttons/BackButton";
 
 const user_badges = ["egg_free"];
 // get the product name and upc from the scanner

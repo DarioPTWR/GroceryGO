@@ -18,6 +18,7 @@ import Test from "./src/pages/Test";
 import Comparison from "./src/pages/Comparison";
 import Profile from "./src/pages/Profile";
 import Item from "./src/pages/Item";
+import Personal from "./src/pages/PersonalInformation";
 
 // Create the Bottom Tab
 const Tab = createBottomTabNavigator();
@@ -54,7 +55,7 @@ function HomeTabs() {
             height: 60
           },
         }}
-        initialRouteName="Scanner"
+        initialRouteName="Profile"
       >
         <Tab.Screen
           name="Scanner"
@@ -108,6 +109,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="CreateAccount" component={CreateAccount} />
+          <Stack.Screen name="Personal" component={Personal} />
           <Stack.Screen name="Home" component={HomeTabs} />
           <Stack.Screen name="ScannerStack" component={ScannerStack} />
         </Stack.Navigator>

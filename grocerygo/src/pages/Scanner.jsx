@@ -11,7 +11,7 @@ import {
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import BackButton from "../components/BackButton";
+import BackButton from "../components/Buttons/BackButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import baseURL from "../baseURL";
 

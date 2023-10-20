@@ -1,18 +1,19 @@
-import { Text, TextInput, View } from "react-native";
+import { Text, Image, TextInput, View } from "react-native";
 import React from "react";
 
-const FormInput = ({ name, input, setInput, secure, validate }) => {
+const FormInput = ({ name, input, setInput, secure, image, validate }) => {
   return (
-    <View>
-      <Text className="text-rose-500">{name}</Text>
+    <View className="flex-row justify-center align-center flex">
+      <Image className="w-8 h-8 my-2 mr-1" source={image}/>
       <TextInput
-        className="h-10 border-b-2 text-lg mb-2"
+        className="h-10 border-b-2 w-72 border-[#9F9F9F] text-lg mb-6"
         secureTextEntry = { secure }
-        onChange={text => {
+        onChange={text=>{
           setInput(text.nativeEvent.text)
           validate(text.nativeEvent.text)
         }}
         value={input}
+        placeholder={name}
       />
     </View>
   );

@@ -13,9 +13,9 @@ import { collection, doc, getDoc, setDoc, updateDoc, onSnapshot } from "firebase
 import db from "../../api/firebaseConfig.js";
 
 // Import components
-import WhiteBackButton from "../components/WhiteBackButton";
-import BackButton from "../components/BackButton";
-import ItemButton from "../components/ItemButton";
+import WhiteBackButton from "../components/Buttons/WhiteBackButton.jsx";
+import BackButton from "../components/Buttons/BackButton.jsx";
+import ItemButton from "../components/Buttons/ItemButton.jsx";
 import { black } from "tailwindcss/colors";
 import { useRoute } from "@react-navigation/native";
 import axios from "axios";

@@ -5,8 +5,8 @@ import { View, Text, ScrollView, TouchableOpacity, TextInput, KeyboardAvoidingVi
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // Import components
-import Button from "../components/Button.jsx";
-import BackButton from "../components/BackButton.jsx";
+import Button from "../components/Buttons/Button.jsx";
+import BackButton from "../components/Buttons/BackButton.jsx";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const preferences = [

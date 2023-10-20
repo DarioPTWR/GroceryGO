@@ -13,8 +13,8 @@ import {
 import AddImage from "../components/AddImage";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import LeftButton from "../components/LeftButton";
-import RedButton from "../components/RedButton";
+import LeftButton from "../components/Buttons/LeftButton";
+import RedButton from "../components/Buttons/RedButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PointsBar from "../components/PointsBar";
 

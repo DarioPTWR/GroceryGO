@@ -13,10 +13,7 @@ const usersDB = {
     },
 
     verifyUser: function(details, callback){
-        sqlStmt = 'SELECT user_id, username, email FROM users WHERE username = $1 AND password = $2;'
-        if (details.emailUsername.includes(".com") || details.emailUsername.includes("@")) {
-            sqlStmt = 'SELECT user_id, username, email FROM users WHERE email = $1 AND password = $2;';
-        }
+        sqlStmt = 'SELECT user_id, username, email FROM users WHERE email = $1 AND password = $2;'
         db.one(sqlStmt, [
             details.emailUsername, 
             details.password,

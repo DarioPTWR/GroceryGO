@@ -1,22 +1,43 @@
 import React, { setState } from "react";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import { View, Text, Image, KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 
 // Import components
-import BackButton from "../components/BackButton";
+import BackButton from "../components/Buttons/BackButton";
 import FormInput from "../components/FormInput";
 import AddImage from "../components/AddImage";
-import Button from "../components/Button";
+import Button from "../components/Buttons/Button";
 import baseURL from "../baseURL";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import SideButton from "../components/Buttons/SideButton";
+import userImg from "../../assets/user.png";
+import passwordImg from "../../assets/password.png";
+import mobileImg from "../../assets/mobile.png";
+import emailImg from "../../assets/email.png";
 
 const CreateAccount = ({ navigation }) => {
-  const [username, setUsername] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [formData, setFormData] = React.useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobileNumber: "",
+    password: "",
+  });
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [mobileNumber, setMobileNumber] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const handleChange = (e) => {
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
   const [errMessage, setErrMessage] = React.useState('');
-  const [profileImage, setProfileImage] = React.useState(null)
   const validateEmail = (email) => {
     emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
@@ -25,10 +46,10 @@ const CreateAccount = ({ navigation }) => {
       setErrMessage("");
     }
   }
-  const validateUsername = (username) => {
-    const usernameRegex = /^[a-zA-Z0-9_-]{3,16}$/;
-    if (!usernameRegex.test(username)) {
-      setErrMessage("Username is invalid, 3 to 16 characters only.");
+  const validateName = (name) => {
+    const nameRegex = /^[A-Za-z\s-']{2,50}$/;
+    if (!nameRegex.test(name)) {
+      setErrMessage("Name is invalid, only letters allowed.");
     } else {
       setErrMessage("");
     }
@@ -41,63 +62,94 @@ const CreateAccount = ({ navigation }) => {
       setErrMessage("");
     }
   }
+  const validateMobile = (mobileNumber) => {
+    const mobileRegex = /^\+65\s\d{4}\s\d{4}$|^\d{4}\s\d{4}$/;
+    if (!mobileRegex.test(mobileNumber)) {
+      setErrMessage("Mobile Number is invalid. Please retry.");
+    } else {
+      setErrMessage("");
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(profileImage,username, email, password)
-    axios
-      .post(`${baseURL}/addUser`, {
-        imageuri: profileImage,
-        username: username,
-        email: email,
-        password: password,
-      })
-      .then(async (res) => {
-        console.log(res.data);
-        try {
-          await AsyncStorage.setItem('username', username);
-          navigation.navigate("Home", {screen: 'Preferences'});
-        } catch (e) {
-          console.log(e)
-        }
-      })
-      .catch((err) => {
-        setErrMessage(err.response.data);
-      });
+    console.log(firstName,lastName,email,mobileNumber,password) // validate again and reject submit if err msg
+    // axios
+    //   .post(`${baseURL}/addUser`, {
+    //     imageuri: profileImage,
+    //     username: username,
+    //     email: email,
+    //     password: password,
+    //   })
+    //   .then(async (res) => {
+    //     console.log(res.data);
+    //     try {
+    //       await AsyncStorage.setItem('username', username);
+    //       navigation.navigate("Home", {screen: 'Preferences'});
+    //     } catch (e) {
+    //       console.log(e)
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     setErrMessage(err.response.data);
+    //   });
+    navigation.navigate("Personal");
   };
 
   return (
-    <SafeAreaView className="h-screen bg-[#fff4ec] flex-1">
+    <SafeAreaView className="h-screen bg-main-background flex-1">
       <KeyboardAvoidingView behavior="position">
         <BackButton navigation={navigation} />
-        <Text className="font-bold text-6xl mt-4 mx-9">Create Account</Text>
-        <Text className="mx-10 text-xl">Start Grocery Shopping with us.</Text>
-        <AddImage saveURI={setProfileImage} />
+        <Image
+        className="object-fill w-24 h-24 mx-9 mt-8"
+        source={require("../../assets/grocerygo.jpg")}
+        />
+        <Text className="font-semibold text-4xl mx-9">Create Account</Text>
+        <Text className="mx-10 text-xl mb-10">Please sign up to continue</Text>
         <View className="w-80 mx-auto mb-4">
           <FormInput
-            name='Username'
-            input={username}
-            setInput={setUsername}
+            name='FIRST NAME'
+            input={firstName}
+            setInput={setFirstName}
+            validate={validateName}
             secure = {false}
-            validate={validateUsername}
-          />
-          <FormInput 
-            name='Email'
-            input={email}
-            setInput={setEmail} 
-            secure = {false}
-            validate={validateEmail}
+            image={userImg}
           />
           <FormInput
-            name='Password'
+            name='LAST NAME'
+            input={lastName}
+            setInput={setLastName}
+            validate={validateName}
+            secure = {false}
+            image={userImg}
+          />
+          <FormInput
+            name='EMAIL ADDRESS'
+            input={email}
+            setInput={setEmail}
+            validate={validateEmail}
+            secure = {false}
+            image={emailImg}
+          />
+          <FormInput 
+            name='MOBILE NUMBER'
+            input={mobileNumber}
+            setInput={setMobileNumber}
+            validate={validateMobile}
+            secure = {false}
+            image={mobileImg}
+          />
+          <FormInput
+            name='PASSWORD'
             input={password}
             setInput={setPassword}
-            secure = {true}
             validate={validatePassword}
+            secure = {true}
+            image={passwordImg}
           />
         </View>
       </KeyboardAvoidingView>
-      <Text className="mx-auto mb-2 text-[#E11D48] text-center">{errMessage}</Text>
-      <Button buttonText="Sign Up" onPress={handleSubmit} />
+      <Text className="mx-auto mb-4 -mt-4 text-[#E11D48] text-center">{errMessage}</Text>
+      <SideButton buttonText="Sign Up" onPress={handleSubmit} />
     </SafeAreaView>
   );
 };

@@ -12,7 +12,7 @@ LogBox.ignoreAllLogs();
 import Login from "./src/pages/Login";
 import SignIn from "./src/pages/SignIn";
 import CreateAccount from "./src/pages/CreateAccount";
-import Preference from "./src/pages/Preference";
+import Preference from "./src/pages/Preference2";
 import Scanner from "./src/pages/Scanner";
 import Test from "./src/pages/Test";
 import Comparison from "./src/pages/Comparison";
@@ -59,7 +59,7 @@ function HomeTabs() {
       >
         <Tab.Screen
           name="Scanner"
-          component={ScannerStack}
+          component={CreateAccount}
           options={{
             tabBarLabel: "", // Hide the label
             tabBarIcon: ({ color, size }) => (

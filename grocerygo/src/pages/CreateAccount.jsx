@@ -1,6 +1,8 @@
 import React, { setState } from "react";
 import { View, Text, Image, KeyboardAvoidingView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { auth } from "../config/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
 
 // Import components
@@ -70,28 +72,14 @@ const CreateAccount = ({ navigation }) => {
       setErrMessage("");
     }
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(firstName,lastName,email,mobileNumber,password) // validate again and reject submit if err msg
-    // axios
-    //   .post(`${baseURL}/addUser`, {
-    //     imageuri: profileImage,
-    //     username: username,
-    //     email: email,
-    //     password: password,
-    //   })
-    //   .then(async (res) => {
-    //     console.log(res.data);
-    //     try {
-    //       await AsyncStorage.setItem('username', username);
-    //       navigation.navigate("Home", {screen: 'Preferences'});
-    //     } catch (e) {
-    //       console.log(e)
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     setErrMessage(err.response.data);
-    //   });
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch(err) {
+      console.error(err);
+    }
     navigation.navigate("Personal");
   };
 

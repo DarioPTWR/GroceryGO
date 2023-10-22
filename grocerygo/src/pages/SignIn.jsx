@@ -4,6 +4,7 @@ import Button from "../components/Buttons/Button";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import {
   TouchableOpacity,
   GestureHandlerRootView,
@@ -19,33 +20,31 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import SideButton from "../components/Buttons/SideButton";
 import userImg from "../../assets/user.png";
 import passwordImg from "../../assets/password.png";
+import { auth } from "../config/firebase";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
   const navigation = useNavigation();
-  const onPressSignIn = (e) => {
+
+  const onPressSignIn = async (e) => {
     console.log("hu")
     e.preventDefault();
     console.log(email, password);
-    axios
-      .post(`${baseURL}/verifyUser`, {
-        emailUsername: email,
-        password: password,
-      })
-      .then(async (res) => {
-        console.log(res.data);
-        try {
-          await AsyncStorage.setItem('username', email);
-          navigation.navigate("Home", {screen: 'Scanner'});
-        } catch (e) {
-          console.log(e);
-        }
-      })
-      .catch((err) => {
-        setErrMessage(err.response.data);
-      });
+    try{
+      let userCredentials = await signInWithEmailAndPassword(auth, email, password)
+      await AsyncStorage.setItem('email', JSON.stringify(userCredentials.user));
+    } catch (err) {
+      console.error(err)
+      if(err.code === "auth/invalid-email"){
+        setErrMessage("Invalid email")
+      } else if(err.code === "auth/invalid-login-credentials"){
+        setErrMessage("Invalid login credentials")
+      } else if(err.code === "auth/too-many-requests"){
+        setErrMessage("Too many attempts. Reset your password or try again later.")
+      } 
+    }
   };
   return (
     <SafeAreaView className="h-screen bg-main-background flex-1">

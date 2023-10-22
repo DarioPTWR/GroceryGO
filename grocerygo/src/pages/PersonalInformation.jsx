@@ -8,7 +8,6 @@ import SideButton from "../components/Buttons/SideButton";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
 const Personal = ({ navigation }) => {
     const [toggleFirst, setFirst] = useState(true);
     const [toggleSecond, setSecond] = useState(false);

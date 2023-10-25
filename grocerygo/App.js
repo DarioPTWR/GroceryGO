@@ -19,6 +19,7 @@ import Comparison from "./src/pages/Comparison";
 import Profile from "./src/pages/Profile";
 import Item from "./src/pages/Item";
 import Personal from "./src/pages/PersonalInformation";
+import SelectStore from "./src/pages/SelectStore";
 
 // Create the Bottom Tab
 const Tab = createBottomTabNavigator();
@@ -110,6 +111,7 @@ export default function App() {
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="CreateAccount" component={CreateAccount} />
           <Stack.Screen name="Personal" component={Personal} />
+          <Stack.Screen name="SelectStore" component={SelectStore} />
           <Stack.Screen name="Home" component={HomeTabs} />
           <Stack.Screen name="ScannerStack" component={ScannerStack} />
         </Stack.Navigator>

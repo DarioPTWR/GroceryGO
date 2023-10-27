@@ -112,7 +112,7 @@ const Preference2 = ({ navigation }) => {
             />
           </View>
           <View className="mt-4">
-            <SideButton onPress={() => {}} buttonText="NEXT" />
+            <SideButton onPress={() => {navigation.navigate("Personal")}} buttonText="NEXT" />
           </View>
         </ScrollView>
       </SafeAreaView>

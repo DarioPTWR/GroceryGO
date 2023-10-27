@@ -20,6 +20,7 @@ import Profile from "./src/pages/Profile";
 import Item from "./src/pages/Item";
 import Personal from "./src/pages/PersonalInformation";
 import SelectStore from "./src/pages/SelectStore";
+import Preference2 from "./src/pages/Preference2";
 
 // Create the Bottom Tab
 const Tab = createBottomTabNavigator();
@@ -110,6 +111,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="CreateAccount" component={CreateAccount} />
+          <Stack.Screen name="Preference" component={Preference2} />
           <Stack.Screen name="Personal" component={Personal} />
           <Stack.Screen name="SelectStore" component={SelectStore} />
           <Stack.Screen name="Home" component={HomeTabs} />

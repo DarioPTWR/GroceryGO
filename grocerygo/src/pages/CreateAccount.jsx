@@ -80,7 +80,7 @@ const CreateAccount = ({ navigation }) => {
     } catch(err) {
       console.error(err);
     }
-    navigation.navigate("Personal");
+    navigation.navigate("Preference");
   };
 
   return (

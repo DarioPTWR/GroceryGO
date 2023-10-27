@@ -427,7 +427,6 @@ const Personal = ({ navigation }) => {
                         placeholder="Select Level"
                     />
                 </View>
-                
                 <SideButton
                     onPress={()=>
                         {

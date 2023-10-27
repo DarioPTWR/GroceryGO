@@ -12,6 +12,7 @@ import FoodButton from "../components/Buttons/FoodButton";
 import { Dropdown } from 'react-native-element-dropdown';
 import { db } from '../config/firebase';
 import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Personal = ({ navigation }) => {
     const [toggleFirst, setFirst] = useState(true);
@@ -70,9 +71,9 @@ const Personal = ({ navigation }) => {
 
     // Page components
     const First = () => {
-        const [AgeValue, setAgeValue] = useState(null);
-        const [HeightValue, setHeightValue] = useState(null);
-        const [WeightValue, setWeightValue] = useState(null);
+        const [AgeValue, setAgeValue] = useState('');
+        const [HeightValue, setHeightValue] = useState('');
+        const [WeightValue, setWeightValue] = useState('');
         const age = [];
         const heights = [];
         const weights = [];
@@ -120,7 +121,6 @@ const Personal = ({ navigation }) => {
                     />
                 </View>
                 <View className='flex flex-row'>
-                     {/* CHANGE VALUES? OR DONT USE DROPDOWN CAUSE OVERLAPPING */}
                     <Text className='text-lg mb-5 mt-2 w-1/2'>What is your height?</Text>
                     <Dropdown
                         className="border-b w-1/3 mb-4 ml-6"
@@ -135,7 +135,6 @@ const Personal = ({ navigation }) => {
                     />
                 </View>
                 <View className='flex flex-row mb-4'>
-                     {/* CHANGE VALUES? OR DONT USE DROPDOWN CAUSE OVERLAPPING */}
                     <Text className='text-lg mb-5 mt-2 w-1/2'>What is your weight?</Text>
                     <Dropdown
                         className="border-b w-1/3 mb-4 ml-6"
@@ -255,7 +254,7 @@ const Personal = ({ navigation }) => {
                     <Text className="text-md mx-auto">Just Me</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        className={`h-32 w-32 border-solid border-2 p-4 rounded-lg mt-4 ml-10 ${TwoPeople ? 'bg-main-green' : 'bg-main-background' }`}
+                        className={`h-32 w-32 border-solid border-2 p-4 rounded-lg mt-4 ml-10 ${twoPeople ? 'bg-main-green' : 'bg-main-background' }`}
                         // onPress is a function that takes in a preference and toggles it
                         onPress={() => {
                             setOnePerson(false)
@@ -268,7 +267,7 @@ const Personal = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity
-                        className={`h-32 w-32 border-solid border-2 p-4 rounded-lg mt-4 ${ManyPeople ? 'bg-main-green' : 'bg-main-background' }`}
+                        className={`h-32 w-32 border-solid border-2 p-4 rounded-lg mt-4 ${manyPeople ? 'bg-main-green' : 'bg-main-background' }`}
                         // onPress is a function that takes in a preference and toggles it
                         onPress={() => {
                             setOnePerson(false)
@@ -547,7 +546,7 @@ const Personal = ({ navigation }) => {
                             navigation.navigate("SelectStore")
                         }
                     }
-                    buttonText="NEXT"
+                    buttonText="SUBMIT"
                 />
             </View>
         );

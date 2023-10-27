@@ -21,6 +21,7 @@ import Item from "./src/pages/Item";
 import Personal from "./src/pages/PersonalInformation";
 import SelectStore from "./src/pages/SelectStore";
 import Preference2 from "./src/pages/Preference2";
+import Profile2 from "./src/pages/Profile2";
 
 // Create the Bottom Tab
 const Tab = createBottomTabNavigator();
@@ -116,6 +117,7 @@ export default function App() {
           <Stack.Screen name="SelectStore" component={SelectStore} />
           <Stack.Screen name="Home" component={HomeTabs} />
           <Stack.Screen name="ScannerStack" component={ScannerStack} />
+          <Stack.Screen name="Profile" component={Profile2} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

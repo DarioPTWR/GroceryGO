@@ -10,55 +10,100 @@ import {
   Pressable,
 } from "react-native";
 // Import an icon library or use a custom SVG icon component
-import AddImage from "../components/AddImage";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import LeftButton from "../components/Buttons/LeftButton";
-import RedButton from "../components/Buttons/RedButton";
+
 import { SafeAreaView } from "react-native-safe-area-context";
-import PointsBar from "../components/PointsBar";
+
+import { useNavigation } from "@react-navigation/native";
+import UserIcon from "../../assets/user.png";
+import LockIcon from "../../assets/Profile_Lock.png";
+import HistoryIcon from "../../assets/Profile_History.png";
+import HeartIcon from "../../assets/Profile_Heart.png";
+import InformationIcon from "../../assets/Profile_Information.png";
+import LocationIcon from "../../assets/Profile_Location.png";
+import SaveIcon from "../../assets/Profile_Save.png";
+
+const ProfileButton = ({ onPress, buttonText, image }) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      className="flex flex-row border-solid border-2 w-80 rounded-lg   items-center h-14"
+    >
+      <View>
+        <Image className="object-contain h-10 w-10 ml-3" source={image} />
+      </View>
+      <View>
+        <Text className=" text-lg text-center ml-10">{buttonText}</Text>
+      </View>
+      <View className="item-end ml-auto mr-5">
+        <Text className="text-lg text-center ">></Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+  
+
+
 
 const Profile2 = () => {
     return (
-        <SafeAreaView className="h-screen bg-[#fff4ec]">
-            <ScrollView>
-                <View className="flex-1 m-3 p-2">
-                    <Text className="font-bold text-6xl ">My Profile</Text>
-                    <Text className="text-base font-medium text-black  pt-2">
-                        Welcome to your profile at GroceryGO!
-                    </Text>
-                    <AddImage />
-
-                    <RedButton
-                        buttonText="Edit Profile"
-                        onPress={onPressEditProfile}
-                    ></RedButton>
-                    <RedButton
-                        buttonText="View Rewards"
-                        onPress={onPressViewProfile}
-                    ></RedButton>
-                </View>
-                {/* profile picture */}
-                <View className="m-3 p-2">
-                    <Text className="text-lg font-bold">My Activity</Text>
-                    <PointsBar></PointsBar>
-                    <Text className="text-lg font-bold mb-4 mt-4">Rosalind's Dashboard</Text>
-                    <View className="mb-4">
-                        <LeftButton
-                            buttonText="My Past Orders"
-                            onPress={onPressPastOrders}
-                        ></LeftButton>
-                        <LeftButton
-                            buttonText="My Liked Products"
-                            onPress={onPressLikedProducts}
-                        ></LeftButton>
-                        <LeftButton
-                            buttonText="My Preferences"
-                            onPress={onPressPreferences}
-                        ></LeftButton>
-                    </View>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+      <SafeAreaView className="h-screen bg-white">
+        <ScrollView>
+          <Image
+            className="object-fill w-20 h-20 mx-auto mb-2 rounded-full"
+            source={require("../../assets/grocerygo.jpg")}
+          />
+          {/* name */}
+          <Text className="text-2xl font-semibold text-center">MAY LIM</Text>
+          {/* use font awesome as the image  */}
+          <View className="flex flex-col items-center mt-4 space-y-4">
+            <View>
+              <ProfileButton
+                buttonText="Edit Profile"
+                image={UserIcon}
+              ></ProfileButton>
+            </View>
+            <View>
+              <ProfileButton
+                buttonText="Change Password"
+                image={LockIcon}
+              ></ProfileButton>
+            </View>
+            <View>
+              <ProfileButton
+                buttonText="Order History"
+                image={HistoryIcon}
+              ></ProfileButton>
+            </View>
+            <View>
+              <ProfileButton
+                buttonText="Favourite"
+                image={HeartIcon}
+              ></ProfileButton>
+            </View>
+            <View>
+              <ProfileButton
+                buttonText="Delivery Address"
+                image={LocationIcon}
+              ></ProfileButton>
+            </View>
+            <View>
+              <ProfileButton
+                buttonText="Terms and Conditions"
+                image={SaveIcon}
+              ></ProfileButton>
+            </View>
+            <View>
+              <ProfileButton
+                buttonText="Help"
+                image={InformationIcon}
+              ></ProfileButton>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     );
 }
+
+export default Profile2;

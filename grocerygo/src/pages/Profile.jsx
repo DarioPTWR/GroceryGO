@@ -30,7 +30,7 @@ const onPressViewProfile = () => {
 };
 
 
-const Profile = () => {
+const Profile = (navigation) => {
     return (
       <SafeAreaView className="h-screen bg-[#fff4ec]">
         <ScrollView>

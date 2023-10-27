@@ -10,6 +10,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import PersonalBackButton from "../components/Buttons/PersonalBackButton";
 import FoodButton from "../components/Buttons/FoodButton";
 import { Dropdown } from 'react-native-element-dropdown';
+import { db } from '../config/firebase';
+import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 
 const Personal = ({ navigation }) => {
     const [toggleFirst, setFirst] = useState(true);
@@ -20,6 +22,51 @@ const Personal = ({ navigation }) => {
     const [toggleSixth, setSixth] = useState(false);
     const [toggleSeventh, setSeventh] = useState(false);
     const [toggleLast, setLast] = useState(false);
+
+    async function getUsername(){
+        try {
+            const username = await AsyncStorage.getItem('username');
+            console.log(username)
+            return jsonValue != null ? username : null;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    // if(getUsername()) navigation.navigate('Home', {screen: 'Scanner'})
+
+    React.useEffect(() => {
+        const newDoc = async() => {
+            try {
+                await setDoc(doc(db, "Personal Information", getUsername()), {
+                    age: null,
+                    gender: null,
+                    height: null,
+                    weight: null,
+                    gender: null,
+                    shoppers: null,
+                    weightGoal: null,
+                    preferredIngredients: null,
+                    protein_intake: null,
+                    fat_intake: null,
+                    carb_intake: null,
+                })
+            } catch(err) {
+                console.error(err)
+            }
+        };
+        newDoc();
+    }, [])
+
+
+    id=getUsername()
+    const updateDatabase = async(data, id) => {
+        try {
+            const personalInfoDoc = doc(db, "Personal Information", id)
+            await updateDoc(personalInfoDoc, data)
+        } catch(err) {
+            console.error(err)
+        }
+    }
 
     // Page components
     const First = () => {
@@ -106,8 +153,12 @@ const Personal = ({ navigation }) => {
                     onPress={()=>{
                         setFirst(false);
                         setSecond(true);
-                        }
-                    }
+                        updateDatabase({
+                            age: AgeValue.value,
+                            height: HeightValue.value,
+                            weight: WeightValue.value
+                        }, id);
+                    }}
                     buttonText="NEXT"
                 />
             </View>
@@ -169,6 +220,11 @@ const Personal = ({ navigation }) => {
                         {
                             setSecond(false);
                             setThird(true);
+
+                            const gender = male ? 'male' : female ? 'female' : 'prefer not to say'
+                            updateDatabase({
+                                gender: gender
+                            }, id);
                         }
                     }
                     buttonText="NEXT"
@@ -178,8 +234,8 @@ const Personal = ({ navigation }) => {
     }
     const Third = () => {
         const [onePerson, setOnePerson] = useState(false);
-        const [TwoPeople, setTwoPeople] = useState(false);
-        const [ManyPeople, setManyPeople] = useState(false);
+        const [twoPeople, setTwoPeople] = useState(false);
+        const [manyPeople, setManyPeople] = useState(false);
         return (
             <View className='h-80 mt-20 ml-9'>
                 <PersonalBackButton setFalse={setThird} setTrue={setSecond}/>
@@ -228,6 +284,11 @@ const Personal = ({ navigation }) => {
                         {
                             setThird(false);
                             setFourth(true);
+
+                            const shoppers = onePerson ? 'one' : twoPeople ? 'two' : 'many'
+                            updateDatabase({
+                                shoppers: shoppers
+                            }, id);
                         }
                     }
                     buttonText="NEXT"
@@ -291,6 +352,11 @@ const Personal = ({ navigation }) => {
                         {
                             setFourth(false);
                             setFifth(true);
+
+                            const weightGoal = lose ? 'lose' : maintain ? 'maintain' : 'gain'
+                            updateDatabase({
+                                weightGoal: weightGoal
+                            }, id);
                         }
                     }
                     buttonText="NEXT"
@@ -308,6 +374,19 @@ const Personal = ({ navigation }) => {
         const [BellPeppers, setBellPeppers] = useState(false);
         const [Mushrooms, setMushrooms] = useState(false);
         const [Carrots, setCarrots] = useState(false);
+        
+        const ingredientsDictionary = {
+            'Eggplants': Eggplants,
+            'Onions': Onions,
+            'Tomatoes': Tomatoes,
+            'Garlic': Garlic,
+            'Coriander': Coriander,
+            'Cilantro': Cilantro,
+            'BellPeppers': BellPeppers,
+            'Mushrooms': Mushrooms,
+            'Carrots': Carrots,
+        };
+        
         return (
             <View className='h-80 mt-20 ml-9'>
                 <PersonalBackButton setFalse={setFifth} setTrue={setFourth}/>
@@ -337,6 +416,16 @@ const Personal = ({ navigation }) => {
                         {
                             setFifth(false);
                             setSixth(true);
+
+                            const preferredIngredients = [];
+                            for (const key in ingredientsDictionary) {
+                                if (ingredientsDictionary[key] === true) {
+                                    preferredIngredients.push(key);
+                                }
+                            }
+                            updateDatabase({
+                                preferredIngredients: preferredIngredients
+                            }, id);
                         }
                     }
                     buttonText="NEXT"
@@ -432,6 +521,11 @@ const Personal = ({ navigation }) => {
                         {
                             setSeventh(false);
                             setLast(true);
+                            updateDatabase({
+                                protein_intake: ProteinValue,
+                                fat_intake: FatValue,
+                                carb_intake: CarbValue,
+                            }, id);
                         }
                     }
                     buttonText="NEXT"

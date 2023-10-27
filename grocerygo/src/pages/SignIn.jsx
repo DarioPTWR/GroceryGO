@@ -29,7 +29,6 @@ const SignIn = () => {
   const navigation = useNavigation();
 
   const onPressSignIn = async (e) => {
-    console.log("hu")
     e.preventDefault();
     console.log(email, password);
     try{

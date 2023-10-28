@@ -10,8 +10,7 @@ import {
   Pressable,
 } from "react-native";
 // Import an icon library or use a custom SVG icon component
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import ProfileButton from "../components/Buttons/ProfileButton";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -23,25 +22,9 @@ import HeartIcon from "../../assets/Profile_Heart.png";
 import InformationIcon from "../../assets/Profile_Information.png";
 import LocationIcon from "../../assets/Profile_Location.png";
 import SaveIcon from "../../assets/Profile_Save.png";
+import PlaceholderIcon from "../../assets/PlaceholderWoman.png";
 
-const ProfileButton = ({ onPress, buttonText, image }) => {
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      className="flex flex-row border-solid border-2 w-80 rounded-lg   items-center h-14"
-    >
-      <View>
-        <Image className="object-contain h-10 w-10 ml-3" source={image} />
-      </View>
-      <View>
-        <Text className=" text-lg text-center ml-10">{buttonText}</Text>
-      </View>
-      <View className="item-end ml-auto mr-5">
-        <Text className="text-lg text-center ">></Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
+
   
 
 
@@ -52,7 +35,7 @@ const Profile2 = () => {
         <ScrollView>
           <Image
             className="object-fill w-20 h-20 mx-auto mb-2 rounded-full"
-            source={require("../../assets/grocerygo.jpg")}
+            source={PlaceholderIcon}
           />
           {/* name */}
           <Text className="text-2xl font-semibold text-center">MAY LIM</Text>

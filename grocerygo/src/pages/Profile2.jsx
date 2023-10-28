@@ -12,6 +12,7 @@ import {
 // Import an icon library or use a custom SVG icon component
 import ProfileButton from "../components/Buttons/ProfileButton";
 
+
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useNavigation } from "@react-navigation/native";
@@ -30,6 +31,8 @@ import PlaceholderIcon from "../../assets/PlaceholderWoman.png";
 
 
 const Profile2 = () => {
+const navigation = useNavigation();
+
     return (
       <SafeAreaView className="h-screen bg-white">
         <ScrollView>
@@ -81,6 +84,9 @@ const Profile2 = () => {
               <ProfileButton
                 buttonText="Help"
                 image={InformationIcon}
+                onPress={() => {
+                  navigation.navigate("Item2");
+                }}
               ></ProfileButton>
             </View>
           </View>

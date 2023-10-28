@@ -48,7 +48,7 @@ const navigation = useNavigation();
         <SideButton
           buttonText={"NEXT"}
           onPress={() => {
-            navigation.navigate("Profile");
+            navigation.navigate("Profile2");
           }}
         />
       </View>

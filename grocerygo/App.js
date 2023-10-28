@@ -16,12 +16,13 @@ import Preference from "./src/pages/Preference2";
 import Scanner from "./src/pages/Scanner";
 import Test from "./src/pages/Test";
 import Comparison from "./src/pages/Comparison";
-import Profile from "./src/pages/Profile";
+// import Profile from "./src/pages/Profile";
 import Item from "./src/pages/Item";
 import Personal from "./src/pages/PersonalInformation";
 import SelectStore from "./src/pages/SelectStore";
 import Preference2 from "./src/pages/Preference2";
 import Profile2 from "./src/pages/Profile2";
+import Item2 from "./src/pages/Item2";
 
 // Create the Bottom Tab
 const Tab = createBottomTabNavigator();
@@ -74,7 +75,7 @@ function HomeTabs() {
           name="Preference"
           component={Preference}
           options={{
-            tabBarLabel: "", // Hide the label
+            tabBarLabel: '', // Hide the label
             tabBarIcon: ({ color, size }) => (
               <AntDesign name="form" size={34} color="white" />
             ),
@@ -117,7 +118,8 @@ export default function App() {
           <Stack.Screen name="SelectStore" component={SelectStore} />
           <Stack.Screen name="Home" component={HomeTabs} />
           <Stack.Screen name="ScannerStack" component={ScannerStack} />
-          <Stack.Screen name="Profile" component={Profile2} />
+          <Stack.Screen name="Profile2" component={Profile2} />
+          <Stack.Screen name='Item2' component={Item2} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

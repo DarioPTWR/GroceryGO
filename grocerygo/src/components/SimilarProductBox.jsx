@@ -1,13 +1,23 @@
-import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { React, useState } from "react";
 
 const SimilarProductBox = ({ product }) => {
+  const [heartPressed, setHeartPressed] = useState(false);
+
+  const toggleHeart = () => {
+    setHeartPressed(!heartPressed);
+  };
+
   return (
     <TouchableOpacity className="w-36 h-50 border-2 border-black rounded-lg p-4 m-4">
       <View className="flex flex-row justify-between">
-        <TouchableOpacity className="ml-auto mb-1">
-          <AntDesign name="hearto" size={15} color="red" />
+        <TouchableOpacity className="ml-auto mb-1" onPress={toggleHeart}>
+          <AntDesign
+            name={heartPressed ? "heart" : "hearto"} // Change icon name based on state
+            size={15}
+            color={heartPressed ? "red" : "black"} // Change color based on state
+          />
         </TouchableOpacity>
       </View>
       <Image

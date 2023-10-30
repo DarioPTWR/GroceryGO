@@ -97,14 +97,14 @@ const Personal = ({ navigation }) => {
         }
         return (
             <View className='h-80 mt-20 ml-9'>
-                <Text className='text-md'>
+                <Text className='text-lg'>
                     Setting Up Your GroceryGO Profile:
                 </Text>
-                <Text className='text-2xl font-bold'>
+                <Text className='text-2xl font-bold mt-2'>
                     Personal Information
                 </Text>
-                <Text className='text-md mb-5'>
-                    We want to understand you better
+                <Text className='text-lg mb-5'>
+                    We want to understand you better.
                 </Text>
                 <View className='flex flex-row'>
                     <Text className='text-lg mb-5 mt-2 w-1/2'>What is your age?</Text>

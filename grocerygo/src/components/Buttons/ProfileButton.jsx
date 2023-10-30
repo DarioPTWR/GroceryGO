@@ -1,10 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity,Image } from "react-native";
 
-
-
-
-
 const ProfileButton = ({ onPress, buttonText, image }) => {
   return (
     <TouchableOpacity
@@ -18,7 +14,7 @@ const ProfileButton = ({ onPress, buttonText, image }) => {
         <Text className=" text-lg text-center ml-10">{buttonText}</Text>
       </View>
       <View className="item-end ml-auto mr-5">
-        <Text className="text-lg text-center ">></Text>
+        <Text className="text-lg text-center ">{'>'}</Text>
       </View>
     </TouchableOpacity>
   );

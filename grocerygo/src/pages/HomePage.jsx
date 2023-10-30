@@ -29,19 +29,19 @@ import Oyster from "../../assets/oyster.png"
 const HomePage =() => {
     const navigation = useNavigation();
     return (
-        <View>
+        <View className='bg-main-background'>
             <ScrollView>
             <View style={{ marginTop: 40, marginLeft: 30, marginRight:30, marginBottom: 4 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ color: 'grey' }} className="text-lg mt-12">Delivery Address | Now</Text>
+                    <Text style={{ color: 'grey' }} className="text-lg">Delivery Address | Now</Text>
                 </View>
-                <View style={{ flexDirection: 'row', marginTop:5 }}>
+                <View style={{ flexDirection: 'row', marginTop:14 }}>
                     <AddToCartButton onPress={() => {}} image={AddToCart} />
                     <NotificationButton onPress={() => {}} image={Notification} />
                 </View>
                 </View>
-                <Text className="text-lg mb-3">65 Telok Blangah, 430291</Text>
+                <Text className="text-lg mb-3 -mt-5">65 Telok Blangah, 430291</Text>
                  {/* Add the SearchBar component below */}
                 <SearchBar
                     placeholder='Try "Onion"'

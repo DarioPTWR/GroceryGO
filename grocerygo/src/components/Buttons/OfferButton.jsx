@@ -5,7 +5,7 @@ const OfferButton = ({ onPress, discountText, itemText, storeText, image }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="flex flex-row w-80 rounded-lg items-center h-14 mt-9" >
+      className="flex flex-row w-11/12 rounded-lg items-center h-14 mt-9" >
       <View>
         <Image style={{resizeMode: 'contain', height: 90, width: 100,}} source={image} />
       </View>

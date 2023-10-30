@@ -19,7 +19,7 @@ import Strawberry from "../../assets/strawberry.png"
 const Offers = () => {
    const navigation = useNavigation();
    return (
-    <View>
+    <View className='bg-main-background h-screen'>
         <ScrollView>
             <Pressable
             style={{marginTop:60}}

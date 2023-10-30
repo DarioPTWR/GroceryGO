@@ -16,6 +16,7 @@ import Preference from "./src/pages/Preference2";
 import Scanner from "./src/pages/Scanner";
 import Test from "./src/pages/Test";
 import Comparison from "./src/pages/Comparison";
+import Offers from "./src/pages/Offers";
 // import Profile from "./src/pages/Profile";
 import Item from "./src/pages/Item";
 import Personal from "./src/pages/PersonalInformation";
@@ -24,6 +25,7 @@ import Preference2 from "./src/pages/Preference2";
 import Profile2 from "./src/pages/Profile2";
 import Item2 from "./src/pages/Item2";
 import RecipeInformation from "./src/pages/RecipeInformation";
+import HomePage from "./src/pages/HomePage";
 
 // Create the Bottom Tab
 const Tab = createBottomTabNavigator();
@@ -83,8 +85,8 @@ function HomeTabs() {
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={Profile}
+          name="Profile2"
+          component={Profile2}
           options={{
             tabBarLabel: "", // Hide the label
             tabBarIcon: ({ color, size }) => (
@@ -106,7 +108,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Item2"
+          initialRouteName="SelectStore"
           screenOptions={{
             headerShown: false,
           }}
@@ -122,6 +124,8 @@ export default function App() {
           <Stack.Screen name="Profile2" component={Profile2} />
           <Stack.Screen name='Item2' component={Item2} />
           <Stack.Screen name='RecipeInformation' component={RecipeInformation} />
+          <Stack.Screen name='Offers' component={Offers} />
+          <Stack.Screen name='HomePage' component={HomePage} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

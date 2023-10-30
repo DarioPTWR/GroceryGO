@@ -557,11 +557,11 @@ const Item2 = ({ navigation }) => {
   //   );
 
   return (
-    <View className="bg-main-background flex">
+    <SafeAreaView className="bg-main-background flex">
       <ScrollView className="h-screen bg-main-background flex">
         <BackButton navigation={navigation} />
         <Image
-          className="object-fill flex-1 h-60 w-36 mx-auto  -mt-7"
+          className="object-fill flex-1 h-60 w-72 mx-auto  -mt-7"
           source={{
             uri: `https://spoonacular.com/productImages/${product.id}-636x393.${product.imageType}`,
           }}
@@ -588,7 +588,7 @@ const Item2 = ({ navigation }) => {
           </View>
 
           <Text className="text-black">
-            ______________________________________
+            __________________________________________
           </Text>
           <Text className="font-bold  text-lg mt-4">PRODUCT DETAILS</Text>
           <Text style={{ fontSize: 16 }} className="self-start mt-3">
@@ -616,7 +616,7 @@ const Item2 = ({ navigation }) => {
             EXPLORE SIMILAR PRODUCTS
           </Text>
           {/* we can always dynamically adjust the width based off the number of similar items */}
-          <ScrollView horizontal="True" contentContainerStyle={{ width: 700 }}>
+          <ScrollView horizontal="True" contentContainerStyle={{ width: 620 }}>
             <View className=" flex flex-row overflow-x-scroll ">
               <SimilarProductBox product={product} />
               <SimilarProductBox product={product} />
@@ -690,7 +690,7 @@ const Item2 = ({ navigation }) => {
       <View
         style={{
           position: "absolute",
-          bottom: 60,
+          bottom: 110,
           width: "100%",
           alignItems: "center",
           flex: 1,
@@ -705,7 +705,7 @@ const Item2 = ({ navigation }) => {
           <Text className="text-white font-bold">ADD TO CART</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

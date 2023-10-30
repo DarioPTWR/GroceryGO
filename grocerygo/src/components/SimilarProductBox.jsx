@@ -10,7 +10,7 @@ const SimilarProductBox = ({ product }) => {
   };
 
   return (
-    <TouchableOpacity className="w-36 h-50 border-2 border-black rounded-lg p-4 m-4">
+    <TouchableOpacity className="w-36 h-50 border-2 border-black rounded-lg p-4 mr-3">
       <View className="flex flex-row justify-between">
         <TouchableOpacity className="ml-auto mb-1" onPress={toggleHeart}>
           <AntDesign

@@ -53,21 +53,47 @@ const GreenCheckmark = () => (
 //    );
 // }
 const Item = ({ navigation }) => {
-
+  const checkUnfulfilled = (ProductPreferences) => {
+    const preferencesMapped = ProductPreferences.map(preference => {
+      switch(preference){
+        case 'egg_free':
+          return 'Egg Free'
+        case 'wheat_free':
+          return 'Wheat Free'
+        case 'grain_free':
+          return 'Grain Free'
+        case 'peanut_free':
+          return 'Peanut Free'
+        case 'primal':
+          return 'Primal'
+        case 'vegetarian':
+          return 'Vegetarian'
+        case "nut_free":
+          return "Nut Free"
+        case "vegan":
+          return "Vegan"
+        case "pescetarian":
+          return "Pescetarian"
+        case 'dairy_free':
+          return 'Dairy Free'
+        case "paleo":
+          return "Paleo"
+        case 'gluten_free':
+          return 'Gluten Free'
+      }
+    })  
+    const filteredPreferences = preferencesMapped.filter((x)=> x !== undefined)
+    let unfulfilledPreferences = preferences.filter((o) => !filteredPreferences.includes(o));
+    let fulfilledPreferences = preferences.filter((o)=> filteredPreferences.includes(o))
+    console.log(unfulfilledPreferences, fulfilledPreferences)
+    return [unfulfilledPreferences, fulfilledPreferences]
+  }
 
   const preferences = [
     "Egg Free",
     "Wheat Free",
     "Grain Free",
-    "Peanut Free",
-    "Primal",
-    "Vegetarian",
-    "Nut Free",
-    "Vegan",
-    "Pescetarian",
     "Dairy Free",
-    "Paleo",
-    "Gluten Free",
   ];
   const [quantity, setQuantity] = React.useState(1); // Initialize the quantity state
 
@@ -474,7 +500,7 @@ const Item = ({ navigation }) => {
     },
     spoonacularScore: 0.0,
   };
-
+  let [unfulfilledPreferences, fulfilledPreferences] = checkUnfulfilled(product.badges)
   //   const [username, setUsername] = React.useState("");
   //   const [userPreferences, setUserPreferences] = React.useState([""]);
 
@@ -559,7 +585,7 @@ const Item = ({ navigation }) => {
   //   );
 
   return (
-    <View className="bg-main-background flex">
+    <SafeAreaView className="bg-main-background flex">
       <ScrollView className="h-screen bg-main-background flex">
         <BackButton navigation={navigation} />
         <Image
@@ -590,7 +616,7 @@ const Item = ({ navigation }) => {
           </View>
 
           <Text className="text-black">
-            ______________________________________
+            __________________________________________
           </Text>
           <Text className="font-bold  text-lg mt-4">PRODUCT DETAILS</Text>
           <Text style={{ fontSize: 16 }} className="self-start mt-3">
@@ -618,7 +644,7 @@ const Item = ({ navigation }) => {
             EXPLORE SIMILAR PRODUCTS
           </Text>
           {/* we can always dynamically adjust the width based off the number of similar items */}
-            <ScrollView horizontal="True" contentContainerStyle={{ width: 700 }}>
+          <ScrollView horizontal="True" contentContainerStyle={{ width: 680 }}>
             <View className=" flex flex-row overflow-x-scroll ">
               <SimilarProductBox product={product} />
               <SimilarProductBox product={product} />
@@ -693,11 +719,12 @@ const Item = ({ navigation }) => {
       <View
         style={{
           position: "absolute",
-          bottom: 60,
+          bottom: 110,
           width: "100%",
           alignItems: "center",
           flex: 1,
         }}
+        className=''
       >
         <TouchableOpacity
           onPress={() => {
@@ -708,7 +735,7 @@ const Item = ({ navigation }) => {
           <Text className="text-white font-bold">ADD TO CART</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -106,7 +106,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="RecipeInformation"
+          initialRouteName="Item2"
           screenOptions={{
             headerShown: false,
           }}

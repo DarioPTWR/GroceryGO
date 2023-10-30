@@ -52,7 +52,7 @@ const GreenCheckmark = () => (
 //      </TouchableOpacity>
 //    );
 // }
-const Item = ({ navigation }) => {
+const Item2 = ({ navigation }) => {
   const preferences = [
     "Egg Free",
     "Wheat Free",
@@ -709,4 +709,4 @@ const Item = ({ navigation }) => {
   );
 };
 
-export default Item;
+export default Item2;

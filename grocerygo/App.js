@@ -105,7 +105,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Personal"
+          initialRouteName="ScannerStack"
           screenOptions={{
             headerShown: false,
           }}

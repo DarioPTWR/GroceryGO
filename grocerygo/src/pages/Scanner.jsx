@@ -92,94 +92,94 @@ import baseURL from "../baseURL";
 // };
 
 export default function Scanner({ navigation }) {
-  // const [hasPermission, setHasPermission] = useState(null);
-  // const [scanned, setScanned] = useState(false);
-  // const [loading, setLoading] = useState(false);
-  // const [product, setProduct] = useState({});
-  // const isFocused = useIsFocused();
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [product, setProduct] = useState({});
+  const isFocused = useIsFocused();
 
-  // React.useEffect(() => {
-  //   const getBarCodeScannerPermissions = async () => {
-  //     const { status } = await BarCodeScanner.requestPermissionsAsync();
-  //     setHasPermission(status === "granted");
-  //   };
+  React.useEffect(() => {
+    const getBarCodeScannerPermissions = async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    };
 
-  //   getBarCodeScannerPermissions();
-  // }, []);
+    getBarCodeScannerPermissions();
+  }, []);
 
-  // const handleBarCodeScanned = ({ type, data }) => {
-  //   setScanned(true);
-  //   setLoading(true);
-  //   // setLoading(false);
-  //   // setProduct({ ...producttt, upc: data });
-  //   axios
-  //     .get(
-  //       `https://api.spoonacular.com/food/products/upc/${data}?apiKey=ef7386df4ade4892ac164598e7f45732`
-  //     )
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setLoading(false);
-  //       if (res.data.status === "failure") {
-  //         setProduct({ title: "Not Found" });
-  //       } else {
-  //         setProduct(res.data);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       setLoading(false);
-  //       setProduct({ title: "Not Found" });
-  //       alert(err);
-  //     });
-  // };
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    setLoading(true);
+    // setLoading(false);
+    // setProduct({ ...producttt, upc: data });
+    axios
+      .get(
+        `https://api.spoonacular.com/food/products/upc/${data}?apiKey=ef7386df4ade4892ac164598e7f45732`
+      )
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+        if (res.data.status === "failure") {
+          setProduct({ title: "Not Found" });
+        } else {
+          setProduct(res.data);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        setProduct({ title: "Not Found" });
+        alert(err);
+      });
+  };
 
-  // if (hasPermission === null) {
-  //   return (
-  //     <SafeAreaView className="flex-1 h-screen px-14 bg-main-background">
-  //       <BackButton />
-  //       <Text className="text-5xl font-extrabold self-start mt-16">
-  //         Scan A Product
-  //       </Text>
-  //       <Text className="text-xs font-bold self-start">
-  //         Use the scanner below to scan the item.
-  //       </Text>
-  //       <View className="w-full aspect-square my-6 bg-zinc-700 flex justify-center p-6">
-  //         <Text className="text-white text-2xl text-center">
-  //           Allow camera access.
-  //         </Text>
-  //       </View>
-  //       <Text className="text-center font-bold text-md">
-  //         Please scan the barcode of the product.
-  //       </Text>
-  //       <Pressable className="bg-main-green rounded-lg p-3 w-full mt-8">
-  //         <Text className="text-white text-lg text-center">Scan Product</Text>
-  //       </Pressable>
-  //     </SafeAreaView>
-  //   );
-  // }
+  if (hasPermission === null) {
+    return (
+      <SafeAreaView className="flex-1 h-screen px-14 bg-main-background">
+        <BackButton />
+        <Text className="text-5xl font-extrabold self-start mt-16">
+          Scan A Product
+        </Text>
+        <Text className="text-xs font-bold self-start">
+          Use the scanner below to scan the item.
+        </Text>
+        <View className="w-full aspect-square my-6 bg-zinc-700 flex justify-center p-6">
+          <Text className="text-white text-2xl text-center">
+            Allow camera access.
+          </Text>
+        </View>
+        <Text className="text-center font-bold text-md">
+          Please scan the barcode of the product.
+        </Text>
+        <Pressable className="bg-main-green rounded-lg p-3 w-full mt-8">
+          <Text className="text-white text-lg text-center">Scan Product</Text>
+        </Pressable>
+      </SafeAreaView>
+    );
+  }
 
-  // if (hasPermission === false) {
-  //   return (
-  //     <SafeAreaView className="flex-1 h-screen px-14 bg-main-background">
-  //       <Text className="text-5xl font-extrabold self-start mt-16">
-  //         Scan A Product
-  //       </Text>
-  //       <Text className="text-xs font-bold self-start">
-  //         Use the scanner below to scan the item.
-  //       </Text>
-  //       <View className="w-full aspect-square my-6 bg-zinc-700 flex justify-center p-6">
-  //         <Text className="text-white text-2xl text-center">
-  //           No camera access.
-  //         </Text>
-  //       </View>
-  //       <Text className="text-center font-bold text-md">
-  //         Please scan the barcode of the product.
-  //       </Text>
-  //       <Pressable className="bg-main-green rounded-lg p-3 w-full mt-8">
-  //         <Text className="text-white text-lg text-center">Scan Product</Text>
-  //       </Pressable>
-  //     </SafeAreaView>
-  //   );
-  // }
+  if (hasPermission === false) {
+    return (
+      <SafeAreaView className="flex-1 h-screen px-14 bg-main-background">
+        <Text className="text-5xl font-extrabold self-start mt-16">
+          Scan A Product
+        </Text>
+        <Text className="text-xs font-bold self-start">
+          Use the scanner below to scan the item.
+        </Text>
+        <View className="w-full aspect-square my-6 bg-zinc-700 flex justify-center p-6">
+          <Text className="text-white text-2xl text-center">
+            No camera access.
+          </Text>
+        </View>
+        <Text className="text-center font-bold text-md">
+          Please scan the barcode of the product.
+        </Text>
+        <Pressable className="bg-main-green rounded-lg p-3 w-full mt-8">
+          <Text className="text-white text-lg text-center">Scan Product</Text>
+        </Pressable>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView className="flex-1 h-screen bg-main-background">
@@ -190,7 +190,7 @@ export default function Scanner({ navigation }) {
         <Text className="text-xs font-bold self-start">
           Use the scanner below to scan the item.
         </Text>
-        {/* {isFocused ? (
+        {isFocused ? (
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           className="w-full aspect-square my-6"
@@ -238,7 +238,7 @@ export default function Scanner({ navigation }) {
               Find Out More
             </Text>
           </Pressable>
-        )} */}
+        )}
       </ScrollView>
     </SafeAreaView>
   );

@@ -26,6 +26,7 @@ import Profile2 from "./src/pages/Profile2";
 import Item2 from "./src/pages/Item2";
 import RecipeInformation from "./src/pages/RecipeInformation";
 import HomePage from "./src/pages/HomePage";
+import SelectRecipes from "./src/pages/SelectRecipes";
 
 // Create the Bottom Tab
 const Tab = createBottomTabNavigator();
@@ -108,7 +109,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="SelectStore"
+          initialRouteName="SelectRecipes"
           screenOptions={{
             headerShown: false,
           }}
@@ -126,6 +127,7 @@ export default function App() {
           <Stack.Screen name='RecipeInformation' component={RecipeInformation} />
           <Stack.Screen name='Offers' component={Offers} />
           <Stack.Screen name='HomePage' component={HomePage} />
+          <Stack.Screen name='SelectRecipes' component={SelectRecipes} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

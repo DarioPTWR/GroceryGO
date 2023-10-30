@@ -29,7 +29,7 @@ import Oyster from "../../assets/oyster.png"
 const HomePage =() => {
     const navigation = useNavigation();
     return (
-        <View className='bg-main-background'>
+        <View className='bg-main-background h-screen'>
             <ScrollView>
             <View style={{ marginTop: 40, marginLeft: 30, marginRight:30, marginBottom: 4 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>

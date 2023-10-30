@@ -29,6 +29,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SimilarProductBox from "../components/SimilarProductBox.jsx";
 
+11090
+
 const GreenCheckmark = () => (
   <Text style={{ color: "green", fontSize: 16 }}>✓</Text>
 );

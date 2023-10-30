@@ -22,6 +22,8 @@ import axios from "axios";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
+
 const Item = ({ navigation }) => {
   const preferences = [
     "Egg Free",

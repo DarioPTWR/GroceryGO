@@ -690,7 +690,7 @@ const Item2 = ({ navigation }) => {
       <View
         style={{
           position: "absolute",
-          bottom: 60,
+          bottom: 115,
           width: "100%",
           alignItems: "center",
           flex: 1,

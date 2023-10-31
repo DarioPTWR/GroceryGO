@@ -183,17 +183,21 @@ export default function Scanner({ navigation }) {
 
   return (
     <SafeAreaView className="flex-1 h-screen bg-main-background">
-      <ScrollView className="px-14">
-        <Text className="text-5xl font-extrabold self-start mt-16">
-          Scan A Product
+      <BackButton navigation={navigation}/>
+      <Text className="text-lg text-center font-extrabold mb-6">
+        Scan the Product
+      </Text>
+      <ScrollView className="px-14"> 
+        <Text className="text-xs self-start mb-6">
+          Instructions
         </Text>
-        <Text className="text-xs font-bold self-start">
-          Use the scanner below to scan the item.
+        <Text className="text-xs self-start">
+          Center the product barcode within the frame, and take a photo.
         </Text>
         {isFocused ? (
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          className="w-full aspect-square my-6"
+          className="my-6 w-96 h-96"
         />
         ) : null }
         {!scanned && !loading && (

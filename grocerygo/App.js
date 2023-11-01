@@ -27,11 +27,97 @@ import Item2 from "./src/pages/Item2";
 import RecipeInformation from "./src/pages/RecipeInformation";
 import HomePage from "./src/pages/HomePage";
 import SelectRecipes from "./src/pages/SelectRecipes";
+import Offers from "./src/pages/Offers";
+import { green } from "tailwindcss/colors";
 
 // Create the Bottom Tab
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+
+
+function HomeTabs() {
+  return (
+    <SafeAreaProvider>
+      <Tab.Navigator
+        initialRouteName='Item2'
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            height: 80,
+            position: 'absolute',
+            bottom:20,
+            right:16  ,
+            left:16,
+            paddingRight:40,
+            paddingLeft:40,
+            borderRadius: 30,
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            // borderColor:'black',
+            // borderWidth:1
+          },
+          tabBarLabelStyle: {
+            marginBottom: -25, // Adjust this value to reduce the gap
+          },
+        }}
+      >
+        <Tab.Screen
+          name='HomePage'
+          component={HomePage}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="home" size={40} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name='Scanner'
+          component={ScannerStack}
+          options={{
+            tabBarLabel: 'Scan',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="qr-code-scanner" size={40} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name='RecipeInformation'
+          component={RecipeInformation}
+          options={{
+            tabBarLabel: 'Meals',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="restaurant" size={50} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name='Offers'
+          component={Offers}
+          options={{
+            tabBarLabel: 'Offers',
+            
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="local-offer" size={40} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name='Profile2'
+          component={Profile2}
+          options={{
+            tabBarLabel: 'Profile',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="account-circle-outline" size={40} color="black" />
+            ),
+          }}
+
+        />
+      </Tab.Navigator>
+    </SafeAreaProvider>
+  );
+}
 function ScannerStack() {
   return (
     <Stack.Navigator
@@ -109,7 +195,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="SelectRecipes"
+          initialRouteName="Home"
           screenOptions={{
             headerShown: false,
           }}
